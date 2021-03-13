@@ -21,7 +21,9 @@ num_aula <- 1
 
 ## Referências do curso
 
-[Clique aqui](https://github.com/curso-r/main-visualizacao/raw/master/material_do_curso.zip) para baixar o material do curso.
+- [Clique aqui](https://github.com/curso-r/main-visualizacao/raw/master/material_do_curso.zip) para baixar o material do curso.
+
+- Os pacotes necessários no curso e o código para instalação estão disponíveis [neste link](https://github.com/curso-r/main-visualizacao#pacotes-necess%C3%A1rios).
 
 - Nosso livro **Ciência de Dados em R**: [https://livro.curso-r.com/](https://livro.curso-r.com/)
 
@@ -43,8 +45,7 @@ knitr::kable(
     slide = CursoRutils:::list_github_files(main_repo, "slides/", "html"),
     link = paste0("https://curso-r.github.io/", main_repo, "/", slide)
   ) %>% 
-    dplyr::filter(!stringr::str_detect(slide, "_files/")) %>% 
-    dplyr::slice(1)
+    dplyr::filter(!stringr::str_detect(slide, "_files/")) 
 )
 ```
 

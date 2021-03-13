@@ -3,9 +3,13 @@
 
 ## Referências do curso
 
-[Clique
-aqui](https://github.com/curso-r/main-visualizacao/raw/master/material_do_curso.zip)
-para baixar o material do curso.
+-   [Clique
+    aqui](https://github.com/curso-r/main-visualizacao/raw/master/material_do_curso.zip)
+    para baixar o material do curso.
+
+-   Os pacotes necessários no curso e o código para instalação estão
+    disponíveis [neste
+    link](https://github.com/curso-r/main-visualizacao#pacotes-necess%C3%A1rios).
 
 -   Nosso livro **Ciência de Dados em R**: <https://livro.curso-r.com/>
 
@@ -22,9 +26,14 @@ Fora do horário de aula ou monitoria:
 
 ## Slides
 
-| slide                              | link                                                                             |
-|:-----------------------------------|:---------------------------------------------------------------------------------|
-| slides/01-introducao-ao-curso.html | <https://curso-r.github.io/main-visualizacao/slides/01-introducao-ao-curso.html> |
+| slide                                     | link                                                                                    |
+|:------------------------------------------|:----------------------------------------------------------------------------------------|
+| slides/01-introducao-ao-curso.html        | <https://curso-r.github.io/main-visualizacao/slides/01-introducao-ao-curso.html>        |
+| slides/02-introducao-rmd.html             | <https://curso-r.github.io/main-visualizacao/slides/02-introducao-rmd.html>             |
+| slides/03-ggplot2-alt.html                | <https://curso-r.github.io/main-visualizacao/slides/03-ggplot2-alt.html>                |
+| slides/03-ggplot2.html                    | <https://curso-r.github.io/main-visualizacao/slides/03-ggplot2.html>                    |
+| slides/04-html-css.html                   | <https://curso-r.github.io/main-visualizacao/slides/04-html-css.html>                   |
+| slides/05-apresentacoes-com-xaringan.html | <https://curso-r.github.io/main-visualizacao/slides/05-apresentacoes-com-xaringan.html> |
 
 ## Scripts utilizados em aula
 
