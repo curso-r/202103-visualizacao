@@ -5,7 +5,7 @@
 
 -   [Clique
     aqui](https://github.com/curso-r/main-visualizacao/raw/master/material_do_curso.zip)
-    para baixar o material do curso.
+    para baixar o material do curso **(EM BREVE)**.
 
 -   Os pacotes necessários no curso e o código para instalação estão
     disponíveis [neste
