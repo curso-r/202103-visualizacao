@@ -19,11 +19,11 @@ num_aula <- 1
 ```
 
 
-## Referências do curso
+## Informações importantes
 
-- [Clique aqui](https://github.com/curso-r/main-visualizacao/raw/master/material_do_curso.zip) para baixar o material do curso **(EM BREVE)**.
+- [Clique aqui](https://github.com/curso-r/main-visualizacao/raw/master/material_do_curso.zip) para baixar o material do curso.
 
-- Os pacotes necessários no curso e o código para instalação estão disponíveis [neste link](https://github.com/curso-r/main-visualizacao#pacotes-necess%C3%A1rios).
+- Os **pacotes necessários** no curso e o código para instalação estão disponíveis [neste link](https://curso-r.github.io/main-visualizacao#pacotes-necess%C3%A1rios).
 
 - Nosso livro **Ciência de Dados em R**: [https://livro.curso-r.com/](https://livro.curso-r.com/)
 
@@ -40,26 +40,23 @@ Fora do horário de aula ou monitoria:
 ## Slides
 
 ```{r}
-knitr::kable(
-  tibble::tibble(
-    slide = CursoRutils:::list_github_files(main_repo, "slides/", "html"),
-    link = paste0("https://curso-r.github.io/", main_repo, "/", slide)
-  ) %>% 
-    dplyr::filter(!stringr::str_detect(slide, "_files/")) 
-)
+tibble::tibble(
+  slide = CursoRutils:::list_github_files(main_repo, "slides/", "html"),
+  link = paste0("https://curso-r.github.io/", main_repo, "/", slide)
+) %>% 
+  dplyr::filter(!stringr::str_detect(slide, "_files/")) %>% 
+  knitr::kable()
 ```
-
 
 ## Scripts utilizados em aula
 
 ```{r}
 pasta <- "exemplos_de_aula/"
-knitr::kable(
-  tibble::tibble(
-    script = list.files(pasta, pattern = ".R"),
-    link = paste0("https://curso-r.github.io/", turma, "/", pasta, script)
-  ) 
-)
+tibble::tibble(
+  script = list.files(pasta, pattern = ".R"),
+  link = paste0("https://curso-r.github.io/", turma, "/", pasta, script)
+) %>% 
+  knitr::kable()
 ```
 
 
@@ -67,22 +64,47 @@ knitr::kable(
 
 
 ```{r}
-knitr::kable(
-  tibble::tibble(
-   nome = CursoRutils:::list_github_files(main_repo, "exercicios/"),
-    link = paste0("https://curso-r.github.io/", main_repo, "/", nome)
-  ) %>%
-     dplyr::slice(1)
-)
+tibble::tibble(
+  nome = CursoRutils:::list_github_files(main_repo, "exercicios/"),
+  link = paste0("https://curso-r.github.io/", main_repo, "/", nome)
+) %>%
+  dplyr::filter(as.numeric(stringr::str_extract(nome, "[0-9]{2}")) <= num_aula) %>% 
+  knitr::kable()
 ```
 
+## Trabalho final
+
+Para o TCC do curso, você terá de entregar um TidyTuesday! O TidyTuesday é um evento semanal  criado para engajar a comunidade no uso do R para análise de dados. Toda semana uma nova base de dados é liberada, e as pessoas da comunidade montam visualizações para compartilhar nas redes sociais.
+
+Se quiser conhecer mais, siga a [hashtag #tidytuesday no Twitter](https://twitter.com/search?q=#TidyTuesday&src=hashtag_click)! 
+
+Para sua entrega, você pode escolher o tema mais recente ou um tema do passado.
+
+Nossa recomendação é [este exemplo](https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-03-09/readme.md). Você pode olhar os trabalhos já realizados no passado para se **inspirar**.
+
+O resultado deverá ser entregue em um relatório ou apresentação à sua escolha. A submissão deve ser feita pelo classroom, subindo um arquivo `.zip` contendo
+
+- Arquivo .Rmd
+- Códigos auxiliares em R (se existirem)
+- O output final (em HTML, PDF, Word, etc). Você pode escolher o formato do trabalho final.
+
+O relatório/apresentação deve conter 
+
+a) uma breve descrição da base de dados
+b) os resultados da sua análise, com explicações/interpretações das visualizações construídas
+c) uma conclusão tirada a partir da análise.
+
+Daremos mais detalhes ao longo das aulas 😉 
 
 ## Material extra
 
 Referências extras comentadas nas aulas.
 
-```{r}
-readxl::read_excel("referencias_extras.xlsx") %>%
+```{r, message=FALSE}
+googlesheets4::gs4_deauth()
+"1SmCKCvJBff3CVty-xYKJ4NhEo2j6sUwkdET46vQisDY" %>% 
+  googledrive::as_id() %>% 
+  googlesheets4::read_sheet(turma) %>%
   dplyr::filter(aula <= num_aula, tema != "Conversa/Dúvidas") %>% 
   dplyr::mutate(link = glue::glue("[{desc}]({url})")) %>%
   dplyr::select(-desc, -url) %>%
@@ -92,16 +114,15 @@ readxl::read_excel("referencias_extras.xlsx") %>%
 
 Materiais que comentamos quando tiramos dúvidas (não necessariamente são relacionadas com o conteúdo da aula).
 
-```{r}
-readxl::read_excel("referencias_extras.xlsx") %>%
+```{r, message=FALSE}
+"1SmCKCvJBff3CVty-xYKJ4NhEo2j6sUwkdET46vQisDY" %>% 
+  googledrive::as_id() %>% 
+  googlesheets4::read_sheet(turma) %>%
   dplyr::filter(aula <= num_aula, tema == "Conversa/Dúvidas") %>% 
   dplyr::mutate(link = glue::glue("[{desc}]({url})")) %>%
   dplyr::select(-desc, -url) %>%
   knitr::kable(col.names = c("Aula", "Tema", "Descrição"))
 ```
-
-
-
 
 ## Redes sociais da Curso-R
 
