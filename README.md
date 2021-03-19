@@ -38,14 +38,20 @@ Fora do horário de aula ou monitoria:
 
 ## Scripts utilizados em aula
 
-| script | link |
-|:-------|:-----|
+Aqui colocamos scripts utilizados em aula que são novos ou que são
+versões modificadas do material básico da aula.
+
+| script                      | link                                                                                       |
+|:----------------------------|:-------------------------------------------------------------------------------------------|
+| exemplo\_pdf\_document.Rmd  | <https://curso-r.github.io/202103-visualizacao/exemplos_de_aula/exemplo_pdf_document.Rmd>  |
+| exemplo\_word\_document.Rmd | <https://curso-r.github.io/202103-visualizacao/exemplos_de_aula/exemplo_word_document.Rmd> |
 
 ## Lição de casa
 
 | nome                         | link                                                                       |
 |:-----------------------------|:---------------------------------------------------------------------------|
 | exercicios/01-introducao.Rmd | <https://curso-r.github.io/main-visualizacao/exercicios/01-introducao.Rmd> |
+| exercicios/02-ggplot2.R      | <https://curso-r.github.io/main-visualizacao/exercicios/02-ggplot2.R>      |
 
 ## Trabalho final
 
@@ -88,19 +94,40 @@ Daremos mais detalhes ao longo das aulas 😉
 
 Referências extras comentadas nas aulas.
 
-| Aula | Tema          | Descrição                                                                                                    |
-|-----:|:--------------|:-------------------------------------------------------------------------------------------------------------|
-|    0 | Instalação    | [Capítulo do livro “Ciência de Dados em R”: Instalação](https://livro.curso-r.com/1-instalacao.html)         |
-|    0 | Comunidades   | [R Brasil - Grupo no telegram](https://t.me/rbrasiloficial)                                                  |
-|    0 | Comunidades   | [Apresentação sobre a R-Ladies São Paulo](https://r-ladies-sao-paulo.github.io/RLadiesTheme/)                |
-|    0 | Comunidades   | [Capítulos da R-Ladies no Brasil](https://github.com/R-Ladies-Sao-Paulo/RLadies-Brasil)                      |
-|    0 | Comunidades   | [R-Ladies - Dashboard](https://benubah.github.io/r-community-explorer/rladies.html)                          |
-|    0 | Comunidades   | [AI Inclusive](https://www.ai-inclusive.org/)                                                                |
-|    0 | Comunidades   | [Discourse da Curso-R](https://discourse.curso-r.com)                                                        |
-|    1 | RMarkdown     | [Capítulo do livro “Ciência de Dados em R”: Relatórios](https://livro.curso-r.com/9-relatorios.html)         |
-|    1 | RMarkdown     | [Folha de cola (cheatsheet): RMarkdown](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf) |
-|    1 | RMarkdown     | [Guia de referência do RMarkdown](https://rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)    |
-|    1 | Boas práticas | [Capítulo do livro “Zen do R”: .RData e .Rhistory](https://curso-r.github.io/zen-do-r/rdata-rhistory.html)   |
+| Aula | Tema               | Descrição                                                                                                                                                     |
+|-----:|:-------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|    0 | Instalação         | [Capítulo do livro “Ciência de Dados em R”: Instalação](https://livro.curso-r.com/1-instalacao.html)                                                          |
+|    0 | Comunidades        | [R Brasil - Grupo no telegram](https://t.me/rbrasiloficial)                                                                                                   |
+|    0 | Comunidades        | [Apresentação sobre a R-Ladies São Paulo](https://r-ladies-sao-paulo.github.io/RLadiesTheme/)                                                                 |
+|    0 | Comunidades        | [Capítulos da R-Ladies no Brasil](https://github.com/R-Ladies-Sao-Paulo/RLadies-Brasil)                                                                       |
+|    0 | Comunidades        | [R-Ladies - Dashboard](https://benubah.github.io/r-community-explorer/rladies.html)                                                                           |
+|    0 | Comunidades        | [AI Inclusive](https://www.ai-inclusive.org/)                                                                                                                 |
+|    0 | Comunidades        | [Discourse da Curso-R](https://discourse.curso-r.com)                                                                                                         |
+|    1 | RMarkdown          | [Capítulo do livro “Ciência de Dados em R”: Relatórios](https://livro.curso-r.com/9-relatorios.html)                                                          |
+|    1 | RMarkdown          | [Folha de cola (cheatsheet): RMarkdown](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf)                                                  |
+|    1 | RMarkdown          | [Guia de referência do RMarkdown](https://rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)                                                     |
+|    1 | Boas práticas      | [Capítulo do livro “Zen do R”: .RData e .Rhistory](https://curso-r.github.io/zen-do-r/rdata-rhistory.html)                                                    |
+|    1 | Dúvidas            | [Uso dos quatro pontos ::](https://curso-r.github.io/zen-do-r/funcoes-deps.html#quatro-pontos)                                                                |
+|    1 | Dúvidas            | [Estilos de CSL - estilos de citação](https://github.com/citation-style-language/styles)                                                                      |
+|    1 | Dúvidas            | [Zotero - gerenciador de referencias](https://www.zotero.org/)                                                                                                |
+|    1 | RMarkdown          | [Temas do pagedown](https://github.com/rstudio/pagedown)                                                                                                      |
+|    1 | Miscelânea         | [Blástula - pacote para enviar emails](https://github.com/rstudio/blastula)                                                                                   |
+|    1 | RMarkdown          | [Livros escritos com Bookdown](https://bookdown.org/)                                                                                                         |
+|    1 | RMarkdown          | [Datadrivencv - pacote para criar currículos com Pagedown](http://nickstrayer.me/datadrivencv/)                                                               |
+|    1 | RMarkdown          | [Pagedreport - pacote com mais templates para pagedown](https://pagedreport.rfortherestofus.com/)                                                             |
+|    2 | Gráficos           | [Cores no R](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf)                                                                                           |
+|    2 | Gráficos           | [Documentação do ggplot2](https://ggplot2.tidyverse.org/reference/index.html)                                                                                 |
+|    2 | Gráficos           | [Ferramenta para buscar as cores em hex](https://htmlcolorcodes.com/)                                                                                         |
+|    2 | Gráficos           | [Pacote ggrepel - afastar as anotações (labels)](https://cran.r-project.org/web/packages/ggrepel/vignettes/ggrepel.html)                                      |
+|    2 | Gráficos           | [Folha de cola (cheatsheet): ggplot2](https://raw.githubusercontent.com/rstudio/cheatsheets/master/translations/portuguese/ggplot2-cheatsheet-portuguese.pdf) |
+|    2 | Gráficos           | [Capítulo do livro “Ciência de Dados em R”: Gráficos](https://livro.curso-r.com/8-graficos.html)                                                              |
+|    2 | Gráficos           | [Pacote ggrepel - afastar as anotações (labels)](https://ggrepel.slowkow.com/)                                                                                |
+|    2 | Gráficos           | [Pacote plotly](https://plotly.com/ggplot2/)                                                                                                                  |
+|    2 | Gráficos           | [Pacote gghighlight - realçando pontos](https://blog.curso-r.com/posts/2020-02-20-gghighlight/)                                                               |
+|    2 | Gráficos           | [Galeria de extensões para o ggplot2](https://exts.ggplot2.tidyverse.org/gallery/)                                                                            |
+|    2 | Gráficos           | [Dicas para formatar gráficos](https://www.curso-r.com/blog/2020-17-02-dicas-relatorios-r4ds1_graficos/)                                                      |
+|    2 | Escrita científica | [Writing Reproducible Research Papers with R Markdown](https://resulumit.com/teaching/rmd_workshop.html#1)                                                    |
+|    2 | RMarkdown          | [R Markdown Cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)                                                          |
 
 Materiais que comentamos quando tiramos dúvidas (não necessariamente são
 relacionadas com o conteúdo da aula).
