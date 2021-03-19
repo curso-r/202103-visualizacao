@@ -15,7 +15,7 @@ library(magrittr)
 
 main_repo <- "main-visualizacao"
 turma <- "202103-visualizacao"
-num_aula <- 1
+num_aula <- 2
 ```
 
 
@@ -49,6 +49,8 @@ tibble::tibble(
 ```
 
 ## Scripts utilizados em aula
+
+Aqui colocamos scripts utilizados em aula que são novos ou que são versões modificadas do material básico da aula.
 
 ```{r}
 pasta <- "exemplos_de_aula/"
@@ -108,7 +110,7 @@ googlesheets4::gs4_deauth()
   dplyr::filter(aula <= num_aula, tema != "Conversa/Dúvidas") %>% 
   dplyr::mutate(link = glue::glue("[{desc}]({url})")) %>%
   dplyr::select(-desc, -url) %>%
-  dplyr::arrange(num_aula) %>% 
+  dplyr::arrange(aula) %>% 
   knitr::kable(col.names = c("Aula", "Tema", "Descrição"))
 ```
 
