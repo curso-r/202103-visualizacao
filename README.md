@@ -53,6 +53,7 @@ versões modificadas do material básico da aula.
 |:-----------------------------|:---------------------------------------------------------------------------|
 | exercicios/01-introducao.Rmd | <https://curso-r.github.io/main-visualizacao/exercicios/01-introducao.Rmd> |
 | exercicios/02-ggplot2.R      | <https://curso-r.github.io/main-visualizacao/exercicios/02-ggplot2.R>      |
+| exercicios/03-xaringan.R     | <https://curso-r.github.io/main-visualizacao/exercicios/03-xaringan.R>     |
 
 ## Trabalho final
 
@@ -142,6 +143,11 @@ Referências extras comentadas nas aulas.
 |    2 | Gráficos           | [Livro da Curso-R - Capítulo sobre Fatores](https://livro.curso-r.com/7-6-forcats.html)                                                                       |
 |    2 | Gráficos           | [Documentação Color Brewer ggplot2](https://ggplot2.tidyverse.org/reference/scale_brewer.html)                                                                |
 |    2 | Gráficos           | [Pacote Thematic](https://rstudio.github.io/thematic/index.html)                                                                                              |
+|    3 | Avançado           | [Folha de cola (cheatsheet): CSS](https://htmlcheatsheet.com/css/)                                                                                            |
+|    3 | Avançado           | [Folha de cola (cheatsheet): HTML](https://htmlcheatsheet.com)                                                                                                |
+|    3 | xaringan           | [Documentação do pacote xaringan](http://slides.yihui.name/xaringan/)                                                                                         |
+|    3 | xaringan           | [xaringan wiki](https://github.com/yihui/xaringan/wiki)                                                                                                       |
+|    3 | xaringan           | [Livro R Markdown (Capítulo 7)](https://bookdown.org/yihui/rmarkdown/xaringan.html)                                                                           |
 
 Materiais que comentamos quando tiramos dúvidas (não necessariamente são
 relacionadas com o conteúdo da aula).
