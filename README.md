@@ -43,6 +43,7 @@ versões modificadas do material básico da aula.
 
 | script                      | link                                                                                       |
 |:----------------------------|:-------------------------------------------------------------------------------------------|
+| 02-ggplot2.R                | <https://curso-r.github.io/202103-visualizacao/exemplos_de_aula/02-ggplot2.R>              |
 | exemplo\_pdf\_document.Rmd  | <https://curso-r.github.io/202103-visualizacao/exemplos_de_aula/exemplo_pdf_document.Rmd>  |
 | exemplo\_word\_document.Rmd | <https://curso-r.github.io/202103-visualizacao/exemplos_de_aula/exemplo_word_document.Rmd> |
 
@@ -128,6 +129,19 @@ Referências extras comentadas nas aulas.
 |    2 | Gráficos           | [Dicas para formatar gráficos](https://www.curso-r.com/blog/2020-17-02-dicas-relatorios-r4ds1_graficos/)                                                      |
 |    2 | Escrita científica | [Writing Reproducible Research Papers with R Markdown](https://resulumit.com/teaching/rmd_workshop.html#1)                                                    |
 |    2 | RMarkdown          | [R Markdown Cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)                                                          |
+|    2 | Gráficos           | [Curiosidade sobre o ggplot2 e Hadley Wickham](https://www.reddit.com/r/dataisbeautiful/comments/3mp9r7/im_hadley_wickham_chief_scientist_at_rstudio_and/)    |
+|    2 | Gráficos           | [Pacote Dados - bases de dados traduzidas](https://cienciadedatos.github.io/dados/)                                                                           |
+|    2 | Gráficos           | [Alberto Cairo - Referência sobre visualização de dados](https://twitter.com/AlbertoCairo)                                                                    |
+|    2 | Gráficos           | [Galeria de gráficos em ggplot2](https://www.r-graph-gallery.com/ggplot2-package.html)                                                                        |
+|    2 | Gráficos           | [Pacote extrafont - importar fontes no windows](https://github.com/wch/extrafont)                                                                             |
+|    2 | Gráficos           | [Curiosidade: Pacote de fonte xkcd](https://xkcd.r-forge.r-project.org)                                                                                       |
+|    2 | Gráficos           | [Formatação de datas - documentação da função strptime](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/strptime)                          |
+|    2 | Gráficos           | [Curiosidade: arte com ggplot2](https://www.data-imaginist.com/art)                                                                                           |
+|    2 | Gráficos           | [Exemplos de ggthemes](https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/)                                                                |
+|    2 | Gráficos           | [Pacote ggridges](https://wilkelab.org/ggridges/)                                                                                                             |
+|    2 | Gráficos           | [Livro da Curso-R - Capítulo sobre Fatores](https://livro.curso-r.com/7-6-forcats.html)                                                                       |
+|    2 | Gráficos           | [Documentação Color Brewer ggplot2](https://ggplot2.tidyverse.org/reference/scale_brewer.html)                                                                |
+|    2 | Gráficos           | [Pacote Thematic](https://rstudio.github.io/thematic/index.html)                                                                                              |
 
 Materiais que comentamos quando tiramos dúvidas (não necessariamente são
 relacionadas com o conteúdo da aula).
@@ -141,7 +155,7 @@ Instagram: <https://www.instagram.com/cursoo_r/>
 
 Twitter: <https://twitter.com/curso_r>
 
-Instagram: <https://www.youtube.com/c/CursoR6/featured>
+Youtube: <https://www.youtube.com/c/CursoR6/featured>
 
 Linkedin: <https://www.linkedin.com/company/curso-r/>
 
