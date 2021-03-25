@@ -45,6 +45,7 @@ versões modificadas do material básico da aula.
 |:----------------------------|:-------------------------------------------------------------------------------------------|
 | 02-ggplot2.R                | <https://curso-r.github.io/202103-visualizacao/exemplos_de_aula/02-ggplot2.R>              |
 | exemplo\_pdf\_document.Rmd  | <https://curso-r.github.io/202103-visualizacao/exemplos_de_aula/exemplo_pdf_document.Rmd>  |
+| exemplo\_pdf\_embed.Rmd     | <https://curso-r.github.io/202103-visualizacao/exemplos_de_aula/exemplo_pdf_embed.Rmd>     |
 | exemplo\_word\_document.Rmd | <https://curso-r.github.io/202103-visualizacao/exemplos_de_aula/exemplo_word_document.Rmd> |
 
 ## Lição de casa
@@ -143,11 +144,14 @@ Referências extras comentadas nas aulas.
 |    2 | Gráficos           | [Livro da Curso-R - Capítulo sobre Fatores](https://livro.curso-r.com/7-6-forcats.html)                                                                       |
 |    2 | Gráficos           | [Documentação Color Brewer ggplot2](https://ggplot2.tidyverse.org/reference/scale_brewer.html)                                                                |
 |    2 | Gráficos           | [Pacote Thematic](https://rstudio.github.io/thematic/index.html)                                                                                              |
+|    2 | Gráficos           | [Apresentação ggplot wizardry](https://twitter.com/CedScherer/status/1374330476412993541?s=20)                                                                |
 |    3 | Avançado           | [Folha de cola (cheatsheet): CSS](https://htmlcheatsheet.com/css/)                                                                                            |
 |    3 | Avançado           | [Folha de cola (cheatsheet): HTML](https://htmlcheatsheet.com)                                                                                                |
 |    3 | xaringan           | [Documentação do pacote xaringan](http://slides.yihui.name/xaringan/)                                                                                         |
 |    3 | xaringan           | [xaringan wiki](https://github.com/yihui/xaringan/wiki)                                                                                                       |
 |    3 | xaringan           | [Livro R Markdown (Capítulo 7)](https://bookdown.org/yihui/rmarkdown/xaringan.html)                                                                           |
+|    3 | Mapas              | [Exemplo de post com mapas com ggplot2](https://beatrizmilz.com/posts/2020-07-27-criando-mapas-com-os-pacotes-tidyverse-e-geobr/)                             |
+|    3 | Relatórios         | [PDF tools](https://docs.ropensci.org/pdftools/)                                                                                                              |
 
 Materiais que comentamos quando tiramos dúvidas (não necessariamente são
 relacionadas com o conteúdo da aula).
