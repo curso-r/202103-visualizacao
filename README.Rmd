@@ -107,24 +107,14 @@ googlesheets4::gs4_deauth()
 "1SmCKCvJBff3CVty-xYKJ4NhEo2j6sUwkdET46vQisDY" %>% 
   googledrive::as_id() %>% 
   googlesheets4::read_sheet(turma) %>%
-  dplyr::filter(aula <= num_aula, tema != "Conversa/Dúvidas") %>% 
+  dplyr::filter(aula <= num_aula) %>% 
   dplyr::mutate(link = glue::glue("[{desc}]({url})")) %>%
   dplyr::select(-desc, -url) %>%
   dplyr::arrange(aula) %>% 
   knitr::kable(col.names = c("Aula", "Tema", "Descrição"))
 ```
 
-Materiais que comentamos quando tiramos dúvidas (não necessariamente são relacionadas com o conteúdo da aula).
 
-```{r, message=FALSE}
-"1SmCKCvJBff3CVty-xYKJ4NhEo2j6sUwkdET46vQisDY" %>% 
-  googledrive::as_id() %>% 
-  googlesheets4::read_sheet(turma) %>%
-  dplyr::filter(aula <= num_aula, tema == "Conversa/Dúvidas") %>% 
-  dplyr::mutate(link = glue::glue("[{desc}]({url})")) %>%
-  dplyr::select(-desc, -url) %>%
-  knitr::kable(col.names = c("Aula", "Tema", "Descrição"))
-```
 
 ## Redes sociais da Curso-R
 

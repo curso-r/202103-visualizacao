@@ -46,7 +46,9 @@ versões modificadas do material básico da aula.
 | 02-ggplot2.R                | <https://curso-r.github.io/202103-visualizacao/exemplos_de_aula/02-ggplot2.R>              |
 | exemplo\_pdf\_document.Rmd  | <https://curso-r.github.io/202103-visualizacao/exemplos_de_aula/exemplo_pdf_document.Rmd>  |
 | exemplo\_pdf\_embed.Rmd     | <https://curso-r.github.io/202103-visualizacao/exemplos_de_aula/exemplo_pdf_embed.Rmd>     |
+| exemplo\_sintaxe.Rmd        | <https://curso-r.github.io/202103-visualizacao/exemplos_de_aula/exemplo_sintaxe.Rmd>       |
 | exemplo\_word\_document.Rmd | <https://curso-r.github.io/202103-visualizacao/exemplos_de_aula/exemplo_word_document.Rmd> |
+| exercicio1\_xaringan.Rmd    | <https://curso-r.github.io/202103-visualizacao/exemplos_de_aula/exercicio1_xaringan.Rmd>   |
 
 ## Lição de casa
 
@@ -98,80 +100,75 @@ Daremos mais detalhes ao longo das aulas 😉
 
 Referências extras comentadas nas aulas.
 
-| Aula | Tema               | Descrição                                                                                                                                                     |
-|-----:|:-------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|    0 | Instalação         | [Capítulo do livro “Ciência de Dados em R”: Instalação](https://livro.curso-r.com/1-instalacao.html)                                                          |
-|    0 | Comunidades        | [R Brasil - Grupo no telegram](https://t.me/rbrasiloficial)                                                                                                   |
-|    0 | Comunidades        | [Apresentação sobre a R-Ladies São Paulo](https://r-ladies-sao-paulo.github.io/RLadiesTheme/)                                                                 |
-|    0 | Comunidades        | [Capítulos da R-Ladies no Brasil](https://github.com/R-Ladies-Sao-Paulo/RLadies-Brasil)                                                                       |
-|    0 | Comunidades        | [R-Ladies - Dashboard](https://benubah.github.io/r-community-explorer/rladies.html)                                                                           |
-|    0 | Comunidades        | [AI Inclusive](https://www.ai-inclusive.org/)                                                                                                                 |
-|    0 | Comunidades        | [Discourse da Curso-R](https://discourse.curso-r.com)                                                                                                         |
-|    1 | RMarkdown          | [Capítulo do livro “Ciência de Dados em R”: Relatórios](https://livro.curso-r.com/9-relatorios.html)                                                          |
-|    1 | RMarkdown          | [Folha de cola (cheatsheet): RMarkdown](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf)                                                  |
-|    1 | RMarkdown          | [Guia de referência do RMarkdown](https://rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)                                                     |
-|    1 | Boas práticas      | [Capítulo do livro “Zen do R”: .RData e .Rhistory](https://curso-r.github.io/zen-do-r/rdata-rhistory.html)                                                    |
-|    1 | Dúvidas            | [Uso dos quatro pontos ::](https://curso-r.github.io/zen-do-r/funcoes-deps.html#quatro-pontos)                                                                |
-|    1 | Dúvidas            | [Estilos de CSL - estilos de citação](https://github.com/citation-style-language/styles)                                                                      |
-|    1 | Dúvidas            | [Zotero - gerenciador de referencias](https://www.zotero.org/)                                                                                                |
-|    1 | RMarkdown          | [Temas do pagedown](https://github.com/rstudio/pagedown)                                                                                                      |
-|    1 | Miscelânea         | [Blástula - pacote para enviar emails](https://github.com/rstudio/blastula)                                                                                   |
-|    1 | RMarkdown          | [Livros escritos com Bookdown](https://bookdown.org/)                                                                                                         |
-|    1 | RMarkdown          | [Datadrivencv - pacote para criar currículos com Pagedown](http://nickstrayer.me/datadrivencv/)                                                               |
-|    1 | RMarkdown          | [Pagedreport - pacote com mais templates para pagedown](https://pagedreport.rfortherestofus.com/)                                                             |
-|    2 | Gráficos           | [Cores no R](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf)                                                                                           |
-|    2 | Gráficos           | [Documentação do ggplot2](https://ggplot2.tidyverse.org/reference/index.html)                                                                                 |
-|    2 | Gráficos           | [Ferramenta para buscar as cores em hex](https://htmlcolorcodes.com/)                                                                                         |
-|    2 | Gráficos           | [Pacote ggrepel - afastar as anotações (labels)](https://cran.r-project.org/web/packages/ggrepel/vignettes/ggrepel.html)                                      |
-|    2 | Gráficos           | [Folha de cola (cheatsheet): ggplot2](https://raw.githubusercontent.com/rstudio/cheatsheets/master/translations/portuguese/ggplot2-cheatsheet-portuguese.pdf) |
-|    2 | Gráficos           | [Capítulo do livro “Ciência de Dados em R”: Gráficos](https://livro.curso-r.com/8-graficos.html)                                                              |
-|    2 | Gráficos           | [Pacote ggrepel - afastar as anotações (labels)](https://ggrepel.slowkow.com/)                                                                                |
-|    2 | Gráficos           | [Pacote plotly](https://plotly.com/ggplot2/)                                                                                                                  |
-|    2 | Gráficos           | [Pacote gghighlight - realçando pontos](https://blog.curso-r.com/posts/2020-02-20-gghighlight/)                                                               |
-|    2 | Gráficos           | [Galeria de extensões para o ggplot2](https://exts.ggplot2.tidyverse.org/gallery/)                                                                            |
-|    2 | Gráficos           | [Dicas para formatar gráficos](https://www.curso-r.com/blog/2020-17-02-dicas-relatorios-r4ds1_graficos/)                                                      |
-|    2 | Escrita científica | [Writing Reproducible Research Papers with R Markdown](https://resulumit.com/teaching/rmd_workshop.html#1)                                                    |
-|    2 | RMarkdown          | [R Markdown Cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)                                                          |
-|    2 | Gráficos           | [Curiosidade sobre o ggplot2 e Hadley Wickham](https://www.reddit.com/r/dataisbeautiful/comments/3mp9r7/im_hadley_wickham_chief_scientist_at_rstudio_and/)    |
-|    2 | Gráficos           | [Pacote Dados - bases de dados traduzidas](https://cienciadedatos.github.io/dados/)                                                                           |
-|    2 | Gráficos           | [Alberto Cairo - Referência sobre visualização de dados](https://twitter.com/AlbertoCairo)                                                                    |
-|    2 | Gráficos           | [Galeria de gráficos em ggplot2](https://www.r-graph-gallery.com/ggplot2-package.html)                                                                        |
-|    2 | Gráficos           | [Pacote extrafont - importar fontes no windows](https://github.com/wch/extrafont)                                                                             |
-|    2 | Gráficos           | [Curiosidade: Pacote de fonte xkcd](https://xkcd.r-forge.r-project.org)                                                                                       |
-|    2 | Gráficos           | [Formatação de datas - documentação da função strptime](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/strptime)                          |
-|    2 | Gráficos           | [Curiosidade: arte com ggplot2](https://www.data-imaginist.com/art)                                                                                           |
-|    2 | Gráficos           | [Exemplos de ggthemes](https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/)                                                                |
-|    2 | Gráficos           | [Pacote ggridges](https://wilkelab.org/ggridges/)                                                                                                             |
-|    2 | Gráficos           | [Livro da Curso-R - Capítulo sobre Fatores](https://livro.curso-r.com/7-6-forcats.html)                                                                       |
-|    2 | Gráficos           | [Documentação Color Brewer ggplot2](https://ggplot2.tidyverse.org/reference/scale_brewer.html)                                                                |
-|    2 | Gráficos           | [Pacote Thematic](https://rstudio.github.io/thematic/index.html)                                                                                              |
-|    2 | Gráficos           | [Apresentação ggplot wizardry](https://twitter.com/CedScherer/status/1374330476412993541?s=20)                                                                |
-|    3 | Avançado           | [Folha de cola (cheatsheet): CSS](https://htmlcheatsheet.com/css/)                                                                                            |
-|    3 | Avançado           | [Folha de cola (cheatsheet): HTML](https://htmlcheatsheet.com)                                                                                                |
-|    3 | xaringan           | [Documentação do pacote xaringan](http://slides.yihui.name/xaringan/)                                                                                         |
-|    3 | xaringan           | [xaringan wiki](https://github.com/yihui/xaringan/wiki)                                                                                                       |
-|    3 | xaringan           | [Livro R Markdown (Capítulo 7)](https://bookdown.org/yihui/rmarkdown/xaringan.html)                                                                           |
-|    3 | Mapas              | [Exemplo de post com mapas com ggplot2](https://beatrizmilz.com/posts/2020-07-27-criando-mapas-com-os-pacotes-tidyverse-e-geobr/)                             |
-|    3 | Relatórios         | [PDF tools](https://docs.ropensci.org/pdftools/)                                                                                                              |
-|    3 | Cores              | [Color brewer](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3)                                                                                     |
-|    3 | Cores              | [Tinter, voce da uma cor e ele gera uma paleta!](https://github.com/sebdalgarno/tinter)                                                                       |
-|    3 | Cores              | [Pacote para visualização de paletas de cores](https://github.com/EmilHvitfeldt/paletteer)                                                                    |
-|    3 | Cores              | [Visualização de paletas para daltonicos](https://davidmathlogic.com/colorblind/#%23D81B60-%231E88E5-%23FFC107-%23004D40)                                     |
-|    3 | Fontes             | [Lista do google com um monte de fontes para usar](https://fonts.google.com)                                                                                  |
-|    3 | GitHub             | [Um pouco sobre github](https://curso-r.github.io/zen-do-r/git-github.html)                                                                                   |
-|    4 | Miscelânea         | [Galeria de html widgets](http://gallery.htmlwidgets.org)                                                                                                     |
-|    4 | Miscelânea         | [Dicas para formatar tabelas](https://www.curso-r.com/blog/2020-12-03-dicas-relatorios-r4ds1_tabelas/)                                                        |
-|    4 | Miscelânea         | [Documentação do r2d3](https://rstudio.github.io/r2d3/)                                                                                                       |
-|    4 | Miscelânea         | [Dicas para formatar tabelas](https://www.curso-r.com/blog/2020-12-03-dicas-relatorios-r4ds1_tabelas/)                                                        |
-|    4 | Miscelânea         | [Documentação do formattable](https://renkun-ken.github.io/formattable/)                                                                                      |
-|    4 | Miscelânea         | [gt cookbook: guia para elaborar tabelas com o pacote gt](https://themockup.blog/static/gt-cookbook.html)                                                     |
-|    4 | Miscelânea         | [Showcase de páginas com Distill](https://jhelvy.github.io/distillery/showcase.html#associa%C3%A7%C3%A3o-brasileira-de-jurimetria)                            |
-
-Materiais que comentamos quando tiramos dúvidas (não necessariamente são
-relacionadas com o conteúdo da aula).
-
-| Aula | Tema | Descrição |
-|-----:|:-----|:----------|
+| Aula | Tema               | Descrição                                                                                                                                                                    |
+|-----:|:-------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|    0 | Instalação         | [Capítulo do livro “Ciência de Dados em R”: Instalação](https://livro.curso-r.com/1-instalacao.html)                                                                         |
+|    0 | Comunidades        | [R Brasil - Grupo no telegram](https://t.me/rbrasiloficial)                                                                                                                  |
+|    0 | Comunidades        | [Apresentação sobre a R-Ladies São Paulo](https://r-ladies-sao-paulo.github.io/RLadiesTheme/)                                                                                |
+|    0 | Comunidades        | [Capítulos da R-Ladies no Brasil](https://github.com/R-Ladies-Sao-Paulo/RLadies-Brasil)                                                                                      |
+|    0 | Comunidades        | [R-Ladies - Dashboard](https://benubah.github.io/r-community-explorer/rladies.html)                                                                                          |
+|    0 | Comunidades        | [AI Inclusive](https://www.ai-inclusive.org/)                                                                                                                                |
+|    0 | Comunidades        | [Discourse da Curso-R](https://discourse.curso-r.com)                                                                                                                        |
+|    1 | RMarkdown          | [Capítulo do livro “Ciência de Dados em R”: Relatórios](https://livro.curso-r.com/9-relatorios.html)                                                                         |
+|    1 | RMarkdown          | [Folha de cola (cheatsheet): RMarkdown](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf)                                                                 |
+|    1 | RMarkdown          | [Guia de referência do RMarkdown](https://rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)                                                                    |
+|    1 | Boas práticas      | [Capítulo do livro “Zen do R”: .RData e .Rhistory](https://curso-r.github.io/zen-do-r/rdata-rhistory.html)                                                                   |
+|    1 | Dúvidas            | [Uso dos quatro pontos ::](https://curso-r.github.io/zen-do-r/funcoes-deps.html#quatro-pontos)                                                                               |
+|    1 | Dúvidas            | [Estilos de CSL - estilos de citação](https://github.com/citation-style-language/styles)                                                                                     |
+|    1 | Dúvidas            | [Zotero - gerenciador de referencias](https://www.zotero.org/)                                                                                                               |
+|    1 | RMarkdown          | [Temas do pagedown](https://github.com/rstudio/pagedown)                                                                                                                     |
+|    1 | Miscelânea         | [Blástula - pacote para enviar emails](https://github.com/rstudio/blastula)                                                                                                  |
+|    1 | RMarkdown          | [Livros escritos com Bookdown](https://bookdown.org/)                                                                                                                        |
+|    1 | RMarkdown          | [Datadrivencv - pacote para criar currículos com Pagedown](http://nickstrayer.me/datadrivencv/)                                                                              |
+|    1 | RMarkdown          | [Pagedreport - pacote com mais templates para pagedown](https://pagedreport.rfortherestofus.com/)                                                                            |
+|    2 | Gráficos           | [Cores no R](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf)                                                                                                          |
+|    2 | Gráficos           | [Documentação do ggplot2](https://ggplot2.tidyverse.org/reference/index.html)                                                                                                |
+|    2 | Gráficos           | [Ferramenta para buscar as cores em hex](https://htmlcolorcodes.com/)                                                                                                        |
+|    2 | Gráficos           | [Pacote ggrepel - afastar as anotações (labels)](https://cran.r-project.org/web/packages/ggrepel/vignettes/ggrepel.html)                                                     |
+|    2 | Gráficos           | [Folha de cola (cheatsheet): ggplot2](https://raw.githubusercontent.com/rstudio/cheatsheets/master/translations/portuguese/ggplot2-cheatsheet-portuguese.pdf)                |
+|    2 | Gráficos           | [Capítulo do livro “Ciência de Dados em R”: Gráficos](https://livro.curso-r.com/8-graficos.html)                                                                             |
+|    2 | Gráficos           | [Pacote ggrepel - afastar as anotações (labels)](https://ggrepel.slowkow.com/)                                                                                               |
+|    2 | Gráficos           | [Pacote plotly](https://plotly.com/ggplot2/)                                                                                                                                 |
+|    2 | Gráficos           | [Pacote gghighlight - realçando pontos](https://blog.curso-r.com/posts/2020-02-20-gghighlight/)                                                                              |
+|    2 | Gráficos           | [Galeria de extensões para o ggplot2](https://exts.ggplot2.tidyverse.org/gallery/)                                                                                           |
+|    2 | Gráficos           | [Dicas para formatar gráficos](https://www.curso-r.com/blog/2020-17-02-dicas-relatorios-r4ds1_graficos/)                                                                     |
+|    2 | Escrita científica | [Writing Reproducible Research Papers with R Markdown](https://resulumit.com/teaching/rmd_workshop.html#1)                                                                   |
+|    2 | RMarkdown          | [R Markdown Cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)                                                                         |
+|    2 | Gráficos           | [Curiosidade sobre o ggplot2 e Hadley Wickham](https://www.reddit.com/r/dataisbeautiful/comments/3mp9r7/im_hadley_wickham_chief_scientist_at_rstudio_and/)                   |
+|    2 | Gráficos           | [Pacote Dados - bases de dados traduzidas](https://cienciadedatos.github.io/dados/)                                                                                          |
+|    2 | Gráficos           | [Alberto Cairo - Referência sobre visualização de dados](https://twitter.com/AlbertoCairo)                                                                                   |
+|    2 | Gráficos           | [Galeria de gráficos em ggplot2](https://www.r-graph-gallery.com/ggplot2-package.html)                                                                                       |
+|    2 | Gráficos           | [Pacote extrafont - importar fontes no windows](https://github.com/wch/extrafont)                                                                                            |
+|    2 | Gráficos           | [Curiosidade: Pacote de fonte xkcd](https://xkcd.r-forge.r-project.org)                                                                                                      |
+|    2 | Gráficos           | [Formatação de datas - documentação da função strptime](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/strptime)                                         |
+|    2 | Gráficos           | [Curiosidade: arte com ggplot2](https://www.data-imaginist.com/art)                                                                                                          |
+|    2 | Gráficos           | [Exemplos de ggthemes](https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/)                                                                               |
+|    2 | Gráficos           | [Pacote ggridges](https://wilkelab.org/ggridges/)                                                                                                                            |
+|    2 | Gráficos           | [Livro da Curso-R - Capítulo sobre Fatores](https://livro.curso-r.com/7-6-forcats.html)                                                                                      |
+|    2 | Gráficos           | [Documentação Color Brewer ggplot2](https://ggplot2.tidyverse.org/reference/scale_brewer.html)                                                                               |
+|    2 | Gráficos           | [Pacote Thematic](https://rstudio.github.io/thematic/index.html)                                                                                                             |
+|    2 | Gráficos           | [Apresentação ggplot wizardry](https://twitter.com/CedScherer/status/1374330476412993541?s=20)                                                                               |
+|    3 | Avançado           | [Folha de cola (cheatsheet): CSS](https://htmlcheatsheet.com/css/)                                                                                                           |
+|    3 | Avançado           | [Folha de cola (cheatsheet): HTML](https://htmlcheatsheet.com)                                                                                                               |
+|    3 | xaringan           | [Documentação do pacote xaringan](http://slides.yihui.name/xaringan/)                                                                                                        |
+|    3 | xaringan           | [xaringan wiki](https://github.com/yihui/xaringan/wiki)                                                                                                                      |
+|    3 | xaringan           | [Livro R Markdown (Capítulo 7)](https://bookdown.org/yihui/rmarkdown/xaringan.html)                                                                                          |
+|    3 | Relatórios         | [PDF tools](https://docs.ropensci.org/pdftools/)                                                                                                                             |
+|    3 | Cores              | [Color brewer](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3)                                                                                                    |
+|    3 | Cores              | [Tinter, voce da uma cor e ele gera uma paleta!](https://github.com/sebdalgarno/tinter)                                                                                      |
+|    3 | Cores              | [Pacote para visualização de paletas de cores](https://github.com/EmilHvitfeldt/paletteer)                                                                                   |
+|    3 | Cores              | [Visualização de paletas para daltonicos](https://davidmathlogic.com/colorblind/#%23D81B60-%231E88E5-%23FFC107-%23004D40)                                                    |
+|    3 | Fontes             | [Lista do google com um monte de fontes para usar](https://fonts.google.com)                                                                                                 |
+|    3 | GitHub             | [Um pouco sobre github](https://curso-r.github.io/zen-do-r/git-github.html)                                                                                                  |
+|    3 | Dúvidas            | [Fórum de dúvidas: Como adicionar fundo nos slides com xaringan?](https://discourse.curso-r.com/t/adicionar-uma-imagem-de-fundo-em-todos-os-slides-feitos-com-xaringan/1076) |
+|    3 | Deploy             | [Netlify Drop](https://app.netlify.com/drop)                                                                                                                                 |
+|    4 | Miscelânea         | [Galeria de html widgets](http://gallery.htmlwidgets.org)                                                                                                                    |
+|    4 | Miscelânea         | [Dicas para formatar tabelas](https://www.curso-r.com/blog/2020-12-03-dicas-relatorios-r4ds1_tabelas/)                                                                       |
+|    4 | Miscelânea         | [Documentação do r2d3](https://rstudio.github.io/r2d3/)                                                                                                                      |
+|    4 | Miscelânea         | [Dicas para formatar tabelas](https://www.curso-r.com/blog/2020-12-03-dicas-relatorios-r4ds1_tabelas/)                                                                       |
+|    4 | Miscelânea         | [Documentação do formattable](https://renkun-ken.github.io/formattable/)                                                                                                     |
+|    4 | Miscelânea         | [gt cookbook: guia para elaborar tabelas com o pacote gt](https://themockup.blog/static/gt-cookbook.html)                                                                    |
+|    4 | Miscelânea         | [Showcase de páginas com Distill](https://jhelvy.github.io/distillery/showcase.html#associa%C3%A7%C3%A3o-brasileira-de-jurimetria)                                           |
 
 ## Redes sociais da Curso-R
 
