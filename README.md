@@ -55,6 +55,7 @@ versões modificadas do material básico da aula.
 | exercicios/01-introducao.Rmd | <https://curso-r.github.io/main-visualizacao/exercicios/01-introducao.Rmd> |
 | exercicios/02-ggplot2.R      | <https://curso-r.github.io/main-visualizacao/exercicios/02-ggplot2.R>      |
 | exercicios/03-xaringan.R     | <https://curso-r.github.io/main-visualizacao/exercicios/03-xaringan.R>     |
+| exercicios/04-miscelanea.R   | <https://curso-r.github.io/main-visualizacao/exercicios/04-miscelanea.R>   |
 
 ## Trabalho final
 
@@ -152,6 +153,19 @@ Referências extras comentadas nas aulas.
 |    3 | xaringan           | [Livro R Markdown (Capítulo 7)](https://bookdown.org/yihui/rmarkdown/xaringan.html)                                                                           |
 |    3 | Mapas              | [Exemplo de post com mapas com ggplot2](https://beatrizmilz.com/posts/2020-07-27-criando-mapas-com-os-pacotes-tidyverse-e-geobr/)                             |
 |    3 | Relatórios         | [PDF tools](https://docs.ropensci.org/pdftools/)                                                                                                              |
+|    3 | Cores              | [Color brewer](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3)                                                                                     |
+|    3 | Cores              | [Tinter, voce da uma cor e ele gera uma paleta!](https://github.com/sebdalgarno/tinter)                                                                       |
+|    3 | Cores              | [Pacote para visualização de paletas de cores](https://github.com/EmilHvitfeldt/paletteer)                                                                    |
+|    3 | Cores              | [Visualização de paletas para daltonicos](https://davidmathlogic.com/colorblind/#%23D81B60-%231E88E5-%23FFC107-%23004D40)                                     |
+|    3 | Fontes             | [Lista do google com um monte de fontes para usar](https://fonts.google.com)                                                                                  |
+|    3 | GitHub             | [Um pouco sobre github](https://curso-r.github.io/zen-do-r/git-github.html)                                                                                   |
+|    4 | Miscelânea         | [Galeria de html widgets](http://gallery.htmlwidgets.org)                                                                                                     |
+|    4 | Miscelânea         | [Dicas para formatar tabelas](https://www.curso-r.com/blog/2020-12-03-dicas-relatorios-r4ds1_tabelas/)                                                        |
+|    4 | Miscelânea         | [Documentação do r2d3](https://rstudio.github.io/r2d3/)                                                                                                       |
+|    4 | Miscelânea         | [Dicas para formatar tabelas](https://www.curso-r.com/blog/2020-12-03-dicas-relatorios-r4ds1_tabelas/)                                                        |
+|    4 | Miscelânea         | [Documentação do formattable](https://renkun-ken.github.io/formattable/)                                                                                      |
+|    4 | Miscelânea         | [gt cookbook: guia para elaborar tabelas com o pacote gt](https://themockup.blog/static/gt-cookbook.html)                                                     |
+|    4 | Miscelânea         | [Showcase de páginas com Distill](https://jhelvy.github.io/distillery/showcase.html#associa%C3%A7%C3%A3o-brasileira-de-jurimetria)                            |
 
 Materiais que comentamos quando tiramos dúvidas (não necessariamente são
 relacionadas com o conteúdo da aula).
