@@ -20,7 +20,7 @@ output:
 layout: true
 
 background-image: url(https://github.com/allisonhorst/stats-illustrations/blob/master/rstats-artwork/cracked_setwd.png?raw=true)
-background-size: contais
+background-size: cover
 
 ---
 class: center, middle
