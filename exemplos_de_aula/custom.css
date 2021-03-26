@@ -1,0 +1,19 @@
+p {
+  
+  font-family: 'Times new roman', sans-serif;
+  font-size: 12pt;
+  text-align: justify;
+  
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre&display=swap');
+
+
+h1, h2 {
+  font-family: 'Averia Serif Libre', cursive;
+}
+
+.hljs{
+  color: #20c6b6;
+  font-family: 'Averia Serif Libre', cursive;
+}

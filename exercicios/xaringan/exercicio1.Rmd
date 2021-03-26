@@ -1,0 +1,49 @@
+---
+title: "Presentation Ninja"
+subtitle: "⚔<br/>with xaringan"
+author: "Yihui Xie"
+institute: "RStudio, PBC"
+date: "2016/12/12 (updated: `r format(Sys.Date(), '%d/%m/%Y')`)"
+output:
+  xaringan::moon_reader:
+
+    chakra: libs/remark-latest.min.js
+    lib_dir: libs
+    css: [default, "chocolate" ,  "chocolate-fonts" ]
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+---
+
+layout: true
+
+background-image: url(https://github.com/allisonhorst/stats-illustrations/blob/master/rstats-artwork/cracked_setwd.png?raw=true)
+background-size: contais
+
+---
+class: center, middle
+
+
+
+
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+## Meu slide!
+
+![Gif fofo de gatinho usando o computador](https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif)
+
+
+---
+class: inverse
+
+```{r echo=FALSE, fig.align='center', fig.alt="Gif fofo de gatinho usando o computador", out.width="80%"}
+knitr::include_graphics("https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif")
+```
+
+
+
