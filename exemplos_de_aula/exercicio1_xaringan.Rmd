@@ -6,6 +6,8 @@ institute: "RStudio, PBC"
 date: "2016/12/12 (updated: `r format(Sys.Date(), '%d/%m/%Y')`)"
 output:
   xaringan::moon_reader:
+
+    chakra: libs/remark-latest.min.js
     lib_dir: libs
     css: [default, "chocolate" ,  "chocolate-fonts" ]
     nature:
@@ -14,18 +16,22 @@ output:
       countIncrementalSlides: false
 ---
 ---
+
 layout: true
 
 background-image: url(https://github.com/allisonhorst/stats-illustrations/blob/master/rstats-artwork/cracked_setwd.png?raw=true)
 background-size: cover
 
+---
+class: center, middle
+
+
+
+
 
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 ```
-
----
-class: center, middle
 
 ## Meu slide!
 
