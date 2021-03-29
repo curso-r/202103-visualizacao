@@ -178,16 +178,16 @@ Referências extras comentadas nas aulas.
 
 ## Dados
 
-| script                  | link                                                                         |
-|:------------------------|:-----------------------------------------------------------------------------|
-| geobr.zip               | <https://curso-r.github.io/202103-visualizacao/dados/geobr.zip>              |
-| geobr/brasil.Rds        | <https://curso-r.github.io/202103-visualizacao/dados/geobr/brasil.Rds>       |
-| geobr/estado\_sp.Rds    | <https://curso-r.github.io/202103-visualizacao/dados/geobr/estado_sp.Rds>    |
-| geobr/estados.Rds       | <https://curso-r.github.io/202103-visualizacao/dados/geobr/estados.Rds>      |
-| geobr/municipio\_sp.Rds | <https://curso-r.github.io/202103-visualizacao/dados/geobr/municipio_sp.Rds> |
-| geobr/municipios.rds    | <https://curso-r.github.io/202103-visualizacao/dados/geobr/municipios.rds>   |
-| imdb.rds                | <https://curso-r.github.io/202103-visualizacao/dados/imdb.rds>               |
-| shp/datageo.zip         | <https://curso-r.github.io/202103-visualizacao/dados/shp/datageo.zip>        |
+| script                      | link                                                                             |
+|:----------------------------|:---------------------------------------------------------------------------------|
+| geobr.zip                   | <https://curso-r.github.io/202103-visualizacao/dados/geobr.zip>                  |
+| geobr/brasil.Rds            | <https://curso-r.github.io/202103-visualizacao/dados/geobr/brasil.Rds>           |
+| geobr/estado\_sp.Rds        | <https://curso-r.github.io/202103-visualizacao/dados/geobr/estado_sp.Rds>        |
+| geobr/estados.Rds           | <https://curso-r.github.io/202103-visualizacao/dados/geobr/estados.Rds>          |
+| geobr/municipio\_sp.Rds     | <https://curso-r.github.io/202103-visualizacao/dados/geobr/municipio_sp.Rds>     |
+| geobr/municipios\_todos.rds | <https://curso-r.github.io/202103-visualizacao/dados/geobr/municipios_todos.rds> |
+| imdb.rds                    | <https://curso-r.github.io/202103-visualizacao/dados/imdb.rds>                   |
+| shp/datageo.zip             | <https://curso-r.github.io/202103-visualizacao/dados/shp/datageo.zip>            |
 
 ## Redes sociais da Curso-R
 
