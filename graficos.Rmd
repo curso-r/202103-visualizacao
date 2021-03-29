@@ -9,33 +9,10 @@ knitr::opts_chunk$set(echo = TRUE)
 # Gráficos da aula 2
 
 
-
-```{r echo=FALSE}
-pasta <- "graficos_aula_2/"
-arquivos <- tibble::tibble(arquivos = 
-  list.files(pasta, full.names = TRUE)
-)
-
-
-```
-
 <center>
 ```{r echo=FALSE, results='asis'}
-
-
-
-for (i in 1:nrow(arquivos)) {
-  # i <- 1
-  arquivo <- arquivos[i, ]
-
-  cat(glue::glue('
-
-    <img src="{arquivo$arquivos}" width="80%">
-
-    <br><br>
-    '
-  ))
-  
-}
+pasta <- "graficos_aula_2/"
+arquivos <-  list.files(pasta, full.names = TRUE)
+cat(glue::glue('<img src="{arquivos}" width="80%"><br><br>'))
 ```
 </center>
