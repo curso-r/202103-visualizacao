@@ -21,7 +21,6 @@ library(fs)
 # Criar a pasta onde colocaremos os arquivos
 fs::dir_create("dados/shp")
 
-fs::dir_create("dados/geobr")
 
 # URL do arquivo shapefile
 u_shp <-
@@ -83,6 +82,25 @@ iqa_cetesb %>%
 # no GitHub: https://ipeagit.github.io/geobr/
 
 
+# Geobr está instável, baixe os arquivos por aqui
+
+fs::dir_create("dados/geobr")
+
+# URL do arquivo shapefile
+zip_geobr <- "https://curso-r.github.io/202103-visualizacao/dados/geobr.zip"
+
+# Fazer o download do arquivo zip
+httr::GET(zip_geobr,
+          httr::write_disk("dados/geobr.zip"),
+          httr::progress())
+
+
+# Descompactar os arquivos
+unzip("dados/geobr.zip", exdir = "dados/")
+
+# Ver quais arquivos estão na pasta que criamos
+fs::dir_ls("dados/geobr/")
+
 # Datasets do Brasil ---------------
 
 # Quais funções para acessar cada dataset:
@@ -92,40 +110,41 @@ geobr::list_geobr()
 
 ##  Delimitação do Brasil
 
-brasil <- geobr::read_country()
+# brasil <- geobr::read_country()
 
 # OU
-# Caso precise baixar: https://github.com/curso-r/202103-visualizacao/blob/master/dados/geobr/brasil.Rds?raw=true
 brasil <- readr::read_rds("dados/geobr/brasil.Rds")
 
 ## Delimitação dos Estados
-estados <- geobr::read_state()
+# estados <- geobr::read_state()
 
 # OU
-# Caso precise baixar: https://github.com/curso-r/202103-visualizacao/blob/master/dados/geobr/estados.Rds?raw=true
 estados <- readr::read_rds("dados/geobr/estados.Rds")
 
 ## Delimitação de um Estado específico
-estado_sp <- geobr::read_state("SP")
+# estado_sp <- geobr::read_state("SP")
 
 # OU
-# Caso precise baixar: https://github.com/curso-r/202103-visualizacao/blob/master/dados/geobr/estado_sp.Rds?raw=true
 estado_sp <- readr::read_rds("dados/geobr/estado_sp.Rds")
 
 
 ## Delimitação dos Municípios
 
-municipios <- geobr::read_municipality()
+# municipios <- geobr::read_municipality()
 
-municipios %>% readr::write_rds("dados/geobr/municipios.Rds")
+# OU
+
+municipios <- readr::read_rds("dados/geobr/municipios_ibge_simplificado.Rds")
+
 
 ## Delimitação de um município específico
 
-municipio_sp <- geobr::read_municipality(code_muni = 3550308)
+# municipio_sp <- geobr::read_municipality(code_muni = 3550308)
 
 # OU
-# Caso precise baixar: https://github.com/curso-r/202103-visualizacao/blob/master/dados/geobr/municipio_sp?raw=true
-municipio_sp <- readr::read_rds("dados/geobr/municipio_sp.Rds")
+municipio_sp <- readr::read_rds("dados/geobr/municipio_sp.Rds") 
+
+
 
 ## Explorar os dados -------
 
@@ -141,6 +160,7 @@ estados %>%
   ggplot() +
   geom_sf()
 
+# Muito pesado!!
 municipios %>%
   ggplot() +
   geom_sf()
@@ -181,6 +201,7 @@ estados %>%
 # Neste exemplo: pontos de coleta no município de São Paulo
 
 glimpse(iqa_cetesb)
+
 glimpse(municipios)
 
 dados_iqa_municipios <-
@@ -189,10 +210,11 @@ dados_iqa_municipios <-
 
 glimpse(dados_iqa_municipios)
 
+
 ## Podemos filtrar os dados como fazemos em tibbles "comuns"
 
 dados_iqa_filtrados <- dados_iqa_municipios %>%
-  filter(name_muni == "São Paulo")
+  filter(nm_mun == "São Paulo")
 
 glimpse(dados_iqa_filtrados)
 
