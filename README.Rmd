@@ -114,6 +114,16 @@ googlesheets4::gs4_deauth()
   knitr::kable(col.names = c("Aula", "Tema", "Descrição"))
 ```
 
+## Dados
+
+```{r}
+pasta <- "dados/"
+tibble::tibble(
+  script = list.files(pasta, recursive = TRUE,pattern = ".zip|.Rds|.rds"),
+  link = paste0("https://curso-r.github.io/", turma, "/", pasta, script)
+) %>% 
+  knitr::kable()
+```
 
 
 ## Redes sociais da Curso-R
