@@ -60,6 +60,9 @@ versões modificadas do material básico da aula.
 | exercicios/03-xaringan.R     | <https://curso-r.github.io/main-visualizacao/exercicios/03-xaringan.R>     |
 | exercicios/04-miscelanea.R   | <https://curso-r.github.io/main-visualizacao/exercicios/04-miscelanea.R>   |
 
+-   [Confira os gráficos feitos durante a aula
+    2!](https://curso-r.github.io/202103-visualizacao/graficos.html)
+
 ## Trabalho final
 
 Para o TCC do curso, você terá de entregar um TidyTuesday! O TidyTuesday

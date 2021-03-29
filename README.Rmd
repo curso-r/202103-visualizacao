@@ -65,6 +65,7 @@ tibble::tibble(
 ## Lição de casa
 
 
+
 ```{r}
 tibble::tibble(
   nome = CursoRutils:::list_github_files(main_repo, "exercicios/"),
@@ -73,6 +74,8 @@ tibble::tibble(
   dplyr::filter(as.numeric(stringr::str_extract(nome, "[0-9]{2}")) <= num_aula) %>% 
   knitr::kable()
 ```
+
+- [Confira os gráficos feitos durante a aula 2!](https://curso-r.github.io/202103-visualizacao/graficos.html)
 
 ## Trabalho final
 
