@@ -134,7 +134,7 @@ estado_sp <- readr::read_rds("dados/geobr/estado_sp.Rds")
 
 # OU
 
-municipios <- readr::read_rds("dados/geobr/municipios_ibge_simplificado.Rds")
+municipios <- readr::read_rds("dados/geobr/municipios_todos.rds")
 
 
 ## Delimitação de um município específico
@@ -214,7 +214,7 @@ glimpse(dados_iqa_municipios)
 ## Podemos filtrar os dados como fazemos em tibbles "comuns"
 
 dados_iqa_filtrados <- dados_iqa_municipios %>%
-  filter(nm_mun == "São Paulo")
+  filter(name_muni == "São Paulo")
 
 glimpse(dados_iqa_filtrados)
 
@@ -224,10 +224,11 @@ glimpse(dados_iqa_filtrados)
 
 dados_idh_muni <- abjData::pnud_min %>% 
   filter(ano == 2010) %>% 
-  mutate(code_muni = as.numeric(muni_id))
+  mutate(code_muni = as.double(muni_id))
+
 
 municipios %>% 
-  filter(abbrev_state == "SP") %>% 
+  filter(abbrev_state  == "SP") %>% 
   inner_join(dados_idh_muni, "code_muni") %>% 
   ggplot(aes(fill = idhm)) +
   geom_sf() +
