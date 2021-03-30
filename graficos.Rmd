@@ -1,0 +1,18 @@
+---
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Gráficos da aula 2
+
+
+<center>
+```{r echo=FALSE, results='asis'}
+pasta <- "graficos_aula_2/"
+arquivos <-  list.files(pasta, full.names = TRUE)
+cat(glue::glue('<img src="{arquivos}" width="80%"><br><br>'))
+```
+</center>

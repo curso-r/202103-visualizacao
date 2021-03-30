@@ -44,6 +44,7 @@ versões modificadas do material básico da aula.
 | script                      | link                                                                                       |
 |:----------------------------|:-------------------------------------------------------------------------------------------|
 | 02-ggplot2.R                | <https://curso-r.github.io/202103-visualizacao/exemplos_de_aula/02-ggplot2.R>              |
+| 03-mapas-com-ggplot2.R      | <https://curso-r.github.io/202103-visualizacao/exemplos_de_aula/03-mapas-com-ggplot2.R>    |
 | 04-miscelanea.R             | <https://curso-r.github.io/202103-visualizacao/exemplos_de_aula/04-miscelanea.R>           |
 | exemplo\_pdf\_document.Rmd  | <https://curso-r.github.io/202103-visualizacao/exemplos_de_aula/exemplo_pdf_document.Rmd>  |
 | exemplo\_pdf\_embed.Rmd     | <https://curso-r.github.io/202103-visualizacao/exemplos_de_aula/exemplo_pdf_embed.Rmd>     |
@@ -59,6 +60,9 @@ versões modificadas do material básico da aula.
 | exercicios/02-ggplot2.R      | <https://curso-r.github.io/main-visualizacao/exercicios/02-ggplot2.R>      |
 | exercicios/03-xaringan.R     | <https://curso-r.github.io/main-visualizacao/exercicios/03-xaringan.R>     |
 | exercicios/04-miscelanea.R   | <https://curso-r.github.io/main-visualizacao/exercicios/04-miscelanea.R>   |
+
+-   [Confira os gráficos feitos durante a aula
+    2!](https://curso-r.github.io/202103-visualizacao/graficos.html)
 
 ## Trabalho final
 
@@ -180,6 +184,19 @@ Referências extras comentadas nas aulas.
 |    5 | Mapas              | [Exemplo de post com mapas com ggplot2](https://beatrizmilz.com/posts/2020-07-27-criando-mapas-com-os-pacotes-tidyverse-e-geobr/)                                            |
 |    5 | Mapas              | [Geocoding de endereços](https://github.com/dkahle/ggmap)                                                                                                                    |
 |    5 | Mapas              | [Unindo mapas the tidy way](https://blog.curso-r.com/posts/2017-11-23-union-sf/)                                                                                             |
+
+## Dados
+
+| script                      | link                                                                             |
+|:----------------------------|:---------------------------------------------------------------------------------|
+| geobr.zip                   | <https://curso-r.github.io/202103-visualizacao/dados/geobr.zip>                  |
+| geobr/brasil.Rds            | <https://curso-r.github.io/202103-visualizacao/dados/geobr/brasil.Rds>           |
+| geobr/estado\_sp.Rds        | <https://curso-r.github.io/202103-visualizacao/dados/geobr/estado_sp.Rds>        |
+| geobr/estados.Rds           | <https://curso-r.github.io/202103-visualizacao/dados/geobr/estados.Rds>          |
+| geobr/municipio\_sp.Rds     | <https://curso-r.github.io/202103-visualizacao/dados/geobr/municipio_sp.Rds>     |
+| geobr/municipios\_todos.rds | <https://curso-r.github.io/202103-visualizacao/dados/geobr/municipios_todos.rds> |
+| imdb.rds                    | <https://curso-r.github.io/202103-visualizacao/dados/imdb.rds>                   |
+| shp/datageo.zip             | <https://curso-r.github.io/202103-visualizacao/dados/shp/datageo.zip>            |
 
 ## Redes sociais da Curso-R
 
