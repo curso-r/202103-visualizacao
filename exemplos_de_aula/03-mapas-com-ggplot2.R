@@ -33,7 +33,7 @@ httr::GET(u_shp,
 
 
 # Descompactar os arquivos
-unzip("dados/shp/datageo.zip", exdir = "dados/shp/")
+unzip("dados/shp/datageo.zip", exdir = "dados/shp/", overwrite = TRUE) # PARA O WINDOWS, NAO USAR A BARRA
 
 # Ver quais arquivos estão na pasta que criamos
 fs::dir_ls("dados/shp")
@@ -71,6 +71,9 @@ iqa_cetesb %>%
   geom_sf(aes(color = valor))
 
 
+ggplot() +
+  geom_sf(data = iqa_cetesb, aes(geometry = geometry))
+
 ## Trabalhando com bases não georreferenciadas ------------
 
 # Identificar a unidade de análise, e com os joins, unir com uma
@@ -96,7 +99,8 @@ httr::GET(zip_geobr,
 
 
 # Descompactar os arquivos
-unzip("dados/geobr.zip", exdir = "dados/")
+unzip("dados/geobr.zip", exdir = "dados/") 
+# quem usa windows tem que tirar a ultima barra do exdir
 
 # Ver quais arquivos estão na pasta que criamos
 fs::dir_ls("dados/geobr/")
@@ -161,9 +165,9 @@ estados %>%
   geom_sf()
 
 # Muito pesado!!
-municipios %>%
-  ggplot() +
-  geom_sf()
+# municipios %>%
+#   ggplot() +
+#   geom_sf()
 
 # simplificando o shapefile para plotar mais rapido
 municipios %>%
@@ -186,6 +190,7 @@ estados %>%
   ggplot() +
   geom_sf()
 
+# Exemplo de mapa que não fica bom
 estados %>%
   st_simplify(dTolerance = .01) %>% 
   group_by(name_region) %>%
@@ -200,7 +205,7 @@ estados %>%
 # Podemos fazer JOINS com objetos espaciais
 # Neste exemplo: pontos de coleta no município de São Paulo
 
-glimpse(iqa_cetesb)
+glimpse(iqa_cetesb) 
 
 glimpse(municipios)
 
@@ -257,9 +262,10 @@ gg_estado <- ggplot() +
 # Gráfico dos pontos no coleta no município de São Paulo
 gg_iqa_saopaulo <- ggplot() +
   geom_sf(data = municipio_sp) +
-  geom_sf(data = dados_iqa_filtrados) +
+  geom_sf(data = dados_iqa_filtrados, aes(color = classe)) +
   theme_bw() +
   coord_sf()
+
 
 
 # Fazer uma composição com patchwork
