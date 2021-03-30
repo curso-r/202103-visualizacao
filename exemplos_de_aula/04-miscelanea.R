@@ -295,8 +295,12 @@ anim <- municipios %>%
   facet_wrap(~abbrev_state) +
   scale_x_log10() +
   # Aqui começa o gganimate
-  labs(title = 'Ano: {frame_time}', x = 'Renda', y = 'Expectativa de vida') +
-  transition_time(ano)
+  labs(title = 'Ano: {frame_time}', 
+       x = 'Renda', 
+       y = 'Expectativa de vida') +
+  transition_time(ano) +
+  enter_grow() +
+  exit_shrink()
 
 ## mostrar o gif!
 animate(anim, nframes = 20, width = 800, height = 400)

@@ -44,6 +44,7 @@ versões modificadas do material básico da aula.
 | script                      | link                                                                                       |
 |:----------------------------|:-------------------------------------------------------------------------------------------|
 | 02-ggplot2.R                | <https://curso-r.github.io/202103-visualizacao/exemplos_de_aula/02-ggplot2.R>              |
+| 04-miscelanea.R             | <https://curso-r.github.io/202103-visualizacao/exemplos_de_aula/04-miscelanea.R>           |
 | exemplo\_pdf\_document.Rmd  | <https://curso-r.github.io/202103-visualizacao/exemplos_de_aula/exemplo_pdf_document.Rmd>  |
 | exemplo\_pdf\_embed.Rmd     | <https://curso-r.github.io/202103-visualizacao/exemplos_de_aula/exemplo_pdf_embed.Rmd>     |
 | exemplo\_sintaxe.Rmd        | <https://curso-r.github.io/202103-visualizacao/exemplos_de_aula/exemplo_sintaxe.Rmd>       |
@@ -148,6 +149,7 @@ Referências extras comentadas nas aulas.
 |    2 | Gráficos           | [Documentação Color Brewer ggplot2](https://ggplot2.tidyverse.org/reference/scale_brewer.html)                                                                               |
 |    2 | Gráficos           | [Pacote Thematic](https://rstudio.github.io/thematic/index.html)                                                                                                             |
 |    2 | Gráficos           | [Apresentação ggplot wizardry](https://twitter.com/CedScherer/status/1374330476412993541?s=20)                                                                               |
+|    2 | Dúvidas            | [Origens dos nomes das versões do R](https://livefreeordichotomize.com/2017/09/28/r-release-names/)                                                                          |
 |    3 | Avançado           | [Folha de cola (cheatsheet): CSS](https://htmlcheatsheet.com/css/)                                                                                                           |
 |    3 | Avançado           | [Folha de cola (cheatsheet): HTML](https://htmlcheatsheet.com)                                                                                                               |
 |    3 | xaringan           | [Documentação do pacote xaringan](http://slides.yihui.name/xaringan/)                                                                                                        |
@@ -162,6 +164,7 @@ Referências extras comentadas nas aulas.
 |    3 | GitHub             | [Um pouco sobre github](https://curso-r.github.io/zen-do-r/git-github.html)                                                                                                  |
 |    3 | Dúvidas            | [Fórum de dúvidas: Como adicionar fundo nos slides com xaringan?](https://discourse.curso-r.com/t/adicionar-uma-imagem-de-fundo-em-todos-os-slides-feitos-com-xaringan/1076) |
 |    3 | Deploy             | [Netlify Drop](https://app.netlify.com/drop)                                                                                                                                 |
+|    3 | Relatórios         | [officeverse: pacotes para usar RMarkdown com outputs office](https://ardata-fr.github.io/officeverse/)                                                                      |
 |    4 | Miscelânea         | [Galeria de html widgets](http://gallery.htmlwidgets.org)                                                                                                                    |
 |    4 | Miscelânea         | [Dicas para formatar tabelas](https://www.curso-r.com/blog/2020-12-03-dicas-relatorios-r4ds1_tabelas/)                                                                       |
 |    4 | Miscelânea         | [Documentação do r2d3](https://rstudio.github.io/r2d3/)                                                                                                                      |
@@ -169,6 +172,14 @@ Referências extras comentadas nas aulas.
 |    4 | Miscelânea         | [Documentação do formattable](https://renkun-ken.github.io/formattable/)                                                                                                     |
 |    4 | Miscelânea         | [gt cookbook: guia para elaborar tabelas com o pacote gt](https://themockup.blog/static/gt-cookbook.html)                                                                    |
 |    4 | Miscelânea         | [Showcase de páginas com Distill](https://jhelvy.github.io/distillery/showcase.html#associa%C3%A7%C3%A3o-brasileira-de-jurimetria)                                           |
+|    4 | Miscelânea         | [Galeria do htmlwidgets](http://gallery.htmlwidgets.org)                                                                                                                     |
+|    4 | Miscelânea         | [Documentação do pacote gt](https://gt.rstudio.com/)                                                                                                                         |
+|    4 | Mapas com ggplot2  | [Documentação do pacote geobr](https://ipeagit.github.io/geobr/)                                                                                                             |
+|    5 | Web                | [(Git) Livro Zen do R: Git e GitHub](https://curso-r.github.io/zen-do-r/git-github.html)                                                                                     |
+|    5 | Web                | [(Git) Material sobre Git e GitHub no RStudio](https://beatrizmilz.com/git_rstudio.html)                                                                                     |
+|    5 | Mapas              | [Exemplo de post com mapas com ggplot2](https://beatrizmilz.com/posts/2020-07-27-criando-mapas-com-os-pacotes-tidyverse-e-geobr/)                                            |
+|    5 | Mapas              | [Geocoding de endereços](https://github.com/dkahle/ggmap)                                                                                                                    |
+|    5 | Mapas              | [Unindo mapas the tidy way](https://blog.curso-r.com/posts/2017-11-23-union-sf/)                                                                                             |
 
 ## Redes sociais da Curso-R
 
