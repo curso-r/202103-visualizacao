@@ -1,0 +1,67 @@
+---
+title: "Untitled"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    theme: flatly
+    favicon: favicon.png
+params:
+  uf: "BA"
+  ano_idh: "1991"
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+```
+
+Aba 1
+===========
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+library(magrittr)
+library(sf)
+library(ggplot2)
+
+municipios <- readr::read_rds("../dados/geobr/municipios_todos.rds")
+p <- abjData::pnud_min %>%
+  dplyr::filter(uf_sigla == params$uf, ano == params$ano_idh) %>% 
+  dplyr::mutate(code_muni = as.numeric(muni_id)) %>% 
+  dplyr::inner_join(municipios, "code_muni") %>% 
+  sf::st_as_sf() %>% 
+  ggplot() +
+  geom_sf(aes(fill = idhm), colour = "black", size = .2) +
+  scale_fill_viridis_c(begin = .2, end = .8, option = "A") +
+  theme_void()
+
+## pesado!
+# plotly::ggplotly(p)
+p
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+abjData::pnud_min %>% 
+  dplyr::filter(uf_sigla == params$uf, ano == params$ano_idh) %>% 
+  dplyr::select(ano, muni_nm, dplyr::starts_with("idhm")) %>% 
+  DT::datatable(options = list(pageLength = 20))
+```
+
+Aba 2
+===========
+
+### Caixa grande!
+
+```{r}
+plot(1:10)
+```
+

@@ -64,8 +64,6 @@ tibble::tibble(
 
 ## Lição de casa
 
-
-
 ```{r}
 tibble::tibble(
   nome = CursoRutils:::list_github_files(main_repo, "exercicios/"),
@@ -100,6 +98,17 @@ b) os resultados da sua análise, com explicações/interpretações das visuali
 c) uma conclusão tirada a partir da análise.
 
 Daremos mais detalhes ao longo das aulas 😉 
+
+## Aula extra
+
+```{r}
+pasta <- "aula_extra/"
+tibble::tibble(
+  script = list.files(pasta),
+  link = paste0("https://curso-r.github.io/", turma, "/", pasta, script)
+) %>% 
+  knitr::kable()
+```
 
 ## Material extra
 

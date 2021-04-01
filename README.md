@@ -101,6 +101,19 @@ O relatório/apresentação deve conter
 
 Daremos mais detalhes ao longo das aulas 😉
 
+## Aula extra
+
+| script                   | link                                                                              |
+|:-------------------------|:----------------------------------------------------------------------------------|
+| favicon.png              | <https://curso-r.github.io/202103-visualizacao/aula_extra/favicon.png>            |
+| flex\_1991\_AC.html      | <https://curso-r.github.io/202103-visualizacao/aula_extra/flex_1991_AC.html>      |
+| flex\_1991\_ES.html      | <https://curso-r.github.io/202103-visualizacao/aula_extra/flex_1991_ES.html>      |
+| flex\_2000\_SP.html      | <https://curso-r.github.io/202103-visualizacao/aula_extra/flex_2000_SP.html>      |
+| flex\_2010\_RS.html      | <https://curso-r.github.io/202103-visualizacao/aula_extra/flex_2010_RS.html>      |
+| flex.html                | <https://curso-r.github.io/202103-visualizacao/aula_extra/flex.html>              |
+| flex.Rmd                 | <https://curso-r.github.io/202103-visualizacao/aula_extra/flex.Rmd>               |
+| gerar\_com\_parametros.R | <https://curso-r.github.io/202103-visualizacao/aula_extra/gerar_com_parametros.R> |
+
 ## Material extra
 
 Referências extras comentadas nas aulas.
@@ -176,14 +189,18 @@ Referências extras comentadas nas aulas.
 |    4 | Miscelânea         | [Documentação do formattable](https://renkun-ken.github.io/formattable/)                                                                                                     |
 |    4 | Miscelânea         | [gt cookbook: guia para elaborar tabelas com o pacote gt](https://themockup.blog/static/gt-cookbook.html)                                                                    |
 |    4 | Miscelânea         | [Showcase de páginas com Distill](https://jhelvy.github.io/distillery/showcase.html#associa%C3%A7%C3%A3o-brasileira-de-jurimetria)                                           |
+|    4 | Mapas              | [Geocoding de endereços](https://github.com/dkahle/ggmap)                                                                                                                    |
+|    4 | Mapas              | [Unindo mapas the tidy way](https://blog.curso-r.com/posts/2017-11-23-union-sf/)                                                                                             |
 |    4 | Miscelânea         | [Galeria do htmlwidgets](http://gallery.htmlwidgets.org)                                                                                                                     |
 |    4 | Miscelânea         | [Documentação do pacote gt](https://gt.rstudio.com/)                                                                                                                         |
 |    4 | Mapas com ggplot2  | [Documentação do pacote geobr](https://ipeagit.github.io/geobr/)                                                                                                             |
+|    4 | Gráficos           | [Documentação do pacote patchwork](https://patchwork.data-imaginist.com/articles/guides/assembly.html)                                                                       |
+|    4 | Mapas              | [Pacote rayshader - mapas em 3d](https://www.rayshader.com)                                                                                                                  |
+|    4 | Dúvidas            | [R OpenSci](https://ropensci.org/)                                                                                                                                           |
 |    5 | Web                | [(Git) Livro Zen do R: Git e GitHub](https://curso-r.github.io/zen-do-r/git-github.html)                                                                                     |
 |    5 | Web                | [(Git) Material sobre Git e GitHub no RStudio](https://beatrizmilz.com/git_rstudio.html)                                                                                     |
 |    5 | Mapas              | [Exemplo de post com mapas com ggplot2](https://beatrizmilz.com/posts/2020-07-27-criando-mapas-com-os-pacotes-tidyverse-e-geobr/)                                            |
-|    5 | Mapas              | [Geocoding de endereços](https://github.com/dkahle/ggmap)                                                                                                                    |
-|    5 | Mapas              | [Unindo mapas the tidy way](https://blog.curso-r.com/posts/2017-11-23-union-sf/)                                                                                             |
+|    5 | Aula extra         | [Pacote countdown - Adicionar o um contador no xaringan](https://github.com/gadenbuie/countdown)                                                                             |
 
 ## Dados
 
