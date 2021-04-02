@@ -104,7 +104,7 @@ Daremos mais detalhes ao longo das aulas 😉
 ```{r}
 pasta <- "aula_extra/"
 tibble::tibble(
-  script = list.files(pasta),
+  script = list.files(pasta, pattern = ".zip"),
   link = paste0("https://curso-r.github.io/", turma, "/", pasta, script)
 ) %>% 
   knitr::kable()
