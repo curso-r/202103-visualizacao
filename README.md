@@ -105,6 +105,8 @@ Daremos mais detalhes ao longo das aulas 😉
 
 | script                     | link                                                                                 |
 |:---------------------------|:-------------------------------------------------------------------------------------|
+| blogdau.zip                | <https://curso-r.github.io/202103-visualizacao/aula_extra/blogdau.zip>               |
+| bookdau.zip                | <https://curso-r.github.io/202103-visualizacao/aula_extra/bookdau.zip>               |
 | exemplo\_distill.zip       | <https://curso-r.github.io/202103-visualizacao/aula_extra/exemplo_distill.zip>       |
 | exemplo\_flexdashboard.zip | <https://curso-r.github.io/202103-visualizacao/aula_extra/exemplo_flexdashboard.zip> |
 
@@ -204,6 +206,7 @@ Referências extras comentadas nas aulas.
 |    5 | Aula extra         | [Showcase de páginas com Distill](https://jhelvy.github.io/distillery/showcase.html)                                                                                         |
 |    5 | Aula extra         | [Temas do pacote flexdashboard](https://rmarkdown.rstudio.com/flexdashboard/using.html#appearance)                                                                           |
 |    5 | Aula extra         | [Dúvida: dimensionando uma tabela com DT::data\_table](https://discourse.curso-r.com/t/dt-data-table-como-dimensionar-o-tamanho-para-caber-no-slide/1101/2)                  |
+|    6 | Instalação         | [Dicas de debug do LaTeX](https://github.com/yihui/tinytex/issues/103)                                                                                                       |
 
 ## Dados
 
