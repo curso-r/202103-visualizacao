@@ -103,16 +103,10 @@ Daremos mais detalhes ao longo das aulas 😉
 
 ## Aula extra
 
-| script                   | link                                                                              |
-|:-------------------------|:----------------------------------------------------------------------------------|
-| favicon.png              | <https://curso-r.github.io/202103-visualizacao/aula_extra/favicon.png>            |
-| flex\_1991\_AC.html      | <https://curso-r.github.io/202103-visualizacao/aula_extra/flex_1991_AC.html>      |
-| flex\_1991\_ES.html      | <https://curso-r.github.io/202103-visualizacao/aula_extra/flex_1991_ES.html>      |
-| flex\_2000\_SP.html      | <https://curso-r.github.io/202103-visualizacao/aula_extra/flex_2000_SP.html>      |
-| flex\_2010\_RS.html      | <https://curso-r.github.io/202103-visualizacao/aula_extra/flex_2010_RS.html>      |
-| flex.html                | <https://curso-r.github.io/202103-visualizacao/aula_extra/flex.html>              |
-| flex.Rmd                 | <https://curso-r.github.io/202103-visualizacao/aula_extra/flex.Rmd>               |
-| gerar\_com\_parametros.R | <https://curso-r.github.io/202103-visualizacao/aula_extra/gerar_com_parametros.R> |
+| script                     | link                                                                                 |
+|:---------------------------|:-------------------------------------------------------------------------------------|
+| exemplo\_distill.zip       | <https://curso-r.github.io/202103-visualizacao/aula_extra/exemplo_distill.zip>       |
+| exemplo\_flexdashboard.zip | <https://curso-r.github.io/202103-visualizacao/aula_extra/exemplo_flexdashboard.zip> |
 
 ## Material extra
 
@@ -201,6 +195,15 @@ Referências extras comentadas nas aulas.
 |    5 | Web                | [(Git) Material sobre Git e GitHub no RStudio](https://beatrizmilz.com/git_rstudio.html)                                                                                     |
 |    5 | Mapas              | [Exemplo de post com mapas com ggplot2](https://beatrizmilz.com/posts/2020-07-27-criando-mapas-com-os-pacotes-tidyverse-e-geobr/)                                            |
 |    5 | Aula extra         | [Pacote countdown - Adicionar o um contador no xaringan](https://github.com/gadenbuie/countdown)                                                                             |
+|    5 | Aula extra         | [Documentação do flexdashboard](https://rmarkdown.rstudio.com/flexdashboard/)                                                                                                |
+|    5 | Aula extra         | [Pacote googleway](https://cran.r-project.org/web/packages/googleway/vignettes/googleway-vignette.html)                                                                      |
+|    5 | Aula extra         | [Documentação do pacote pagedown](https://pagedown.rbind.io/)                                                                                                                |
+|    5 | Aula extra         | [Icones com fontawesome](https://fontawesome.com/icons?d=gallery&p=2&m=free)                                                                                                 |
+|    5 | Aula extra         | [Pacote metathis, para melhorar tags meta](https://pkg.garrickadenbuie.com/metathis/)                                                                                        |
+|    5 | Aula extra         | [Verificar os cards do twitter](https://cards-dev.twitter.com/validator?)                                                                                                    |
+|    5 | Aula extra         | [Showcase de páginas com Distill](https://jhelvy.github.io/distillery/showcase.html)                                                                                         |
+|    5 | Aula extra         | [Temas do pacote flexdashboard](https://rmarkdown.rstudio.com/flexdashboard/using.html#appearance)                                                                           |
+|    5 | Aula extra         | [Dúvida: dimensionando uma tabela com DT::data\_table](https://discourse.curso-r.com/t/dt-data-table-como-dimensionar-o-tamanho-para-caber-no-slide/1101/2)                  |
 
 ## Dados
 
