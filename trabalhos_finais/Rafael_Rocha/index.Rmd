@@ -1,0 +1,732 @@
+---
+title: "Teste de Bechdel-Wallace e a Representação de gênero na indústria cinematográfica"
+subtitle: "Exercício final do curso de Visualização de Dados"
+author: "Rafael Rocha"
+date: "10/04/2021"
+output:
+  xaringan::moon_reader:
+    css: [xaringan-themer.css, custom.css]
+    chakra: libs/remark-latest.min.js 
+    lib_dir: libs
+    encoding: "UTF-8"
+    
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: '16:9'
+      titleSlideClass: [top, left, inverse]
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+library(dplyr)
+library(stringr)
+library(forcats)
+library(ggplot2)
+library(ggthemes)
+library(waffle)
+library(ggtext)
+library(hrbrthemes)
+library(viridis)
+library(ggpubr)
+library(knitr)
+
+style_solarized_light(
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "300", "300i"),
+  code_font_google   = google_font("Fira Mono")
+)
+
+cores <-c(
+  "fail" = "#B22222",
+  "pass" = "#008080",
+  "text" = "#454536",
+  "title_fam" = "IBM Plex Sans SemiBold",
+  "text_fam" = "IBM Plex Sans"
+) 
+
+raw_bechdel <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-03-09/raw_bechdel.csv')
+movies <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-03-09/movies.csv')
+```
+
+
+class: inverse,left
+
+# O teste de Bechdel-Wallace
+
+O teste de Bechdel, busca avaliar a representação feminina nas obras de ficção. Para passar no
+teste, uma obra deve satisfazer 3 critérios:
+
+1. Deve ter pelo menos duas personagens do sexo feminino
+1. Elas devem conversar uma com a outra
+1. A conversa deve ser sobre alguma coisa que não seja um homem
+
+O teste recebe o nome em homenagem à cartunista norte-americana Alison Bechdel. Em 1985, uma personagem de seus quadrinhos _Dykes to Watch Out For_ expressou a ideia, que a autora atribuiu a sua amiga Liz Wallace, sendo conhecido também como teste de Bechdel-Wallace.
+
+---
+class:  left
+
+# Objetivo:
+
+Este trabalho tem como objetivo explorar as bases de dados de filmes lançados nas últimas décadas, com ênfase especialmente na representação de gênero à partir dos resultados da aplicação do teste de de Bechdel-Wallace. Serão utilizadas duas bases de dados:
+
+__Movies__: base com dados de **1794 filmes** lançados entre os anos de 1970 e 2013. A base contém dados sobre o orçamento e arrecadação dos filmes, gêneros, atores e diretores envolvidos, além do resultado do teste Bechdel-Wallace para cada filme. 
+
+__Raw_bechdel__: base com dados de **8839 filmes** lançados entre os anos de 1888 e 2021, mas apenas com os dados acerca do título do filme, seu registro no IMDB e sua nota no teste Bechdel-Wallace (0 = falha, 3 = sucesso).
+
+O trabalho é dividido em duas partes. A primeira parte apresenta um perfil mais geral dos filmes lançados entre 1970 e 2013, e de como eles representam as personagens do sexo feminino, a partir da base *Movies*. A segunda parte (mais divertida!), compara 12 franquias de filmes entre si, para mensurar quais tiveram o melhor desempenho no teste de Bechdel-Wallace, e utiliza a base *Raw_bechdel*, por ser mais atual.
+
+---
+class: center,middle
+
+#__Parte 1: Análise geral__
+---
+class:  left
+## Filmes lançados por ano e o teste de Bechdel-Wallace
+
+```{r echo=FALSE}
+
+movies_ano <- movies %>%
+  count(year, binary) %>%
+  group_by(year)
+
+filmes_ano_bw <- ggplot(movies_ano, aes(x=year, y=n, fill=binary)) + 
+  geom_area(alpha=0.6 , size=.5, colour="white") +
+  labs(
+    x = "Anos",
+    y = "Número de filmes",
+    title = "Filmes lançados e seus resultados no teste de Bechdel-Wallace",
+    subtitle = "1970-2013")+
+  scale_fill_manual(values = c(cores[["fail"]], cores[["pass"]]), name = "Resultado", 
+                    labels = c("Falha", "Sucesso"))+
+  theme_xaringan() +
+  theme(
+    panel.spacing = unit(0.1, "lines"),
+    strip.text.x = element_text(size = 6),
+    plot.title = element_text(size=18),
+    plot.subtitle = element_text(size=10),
+    legend.title = element_text(size = 10),
+    legend.text = element_text(size = 7),
+    axis.text=element_text(size=12),
+    axis.title=element_text(size=14,face="bold"))
+
+  
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='70%', fig.height=3.5, fig.width=8, fig.retina=3, fig.align='center'}
+filmes_ano_bw
+```
+
+O gráfico acima evidencia dois elementos centrais: o intenso aumento do volume de filmes lançados, principalmente à partir da metade da década de 90; e como, independente do aumento no volume das produções cinematográficas, a proporção de filmes que passam no teste de Bechdel-Wallace sempre se manteve muito inferior aqueles quem falham no teste. 
+---
+class: left
+## Número de filmes lançados por gênero
+
+```{r echo=FALSE}
+
+movies_genero_ano <- movies %>%
+  filter(!is.na(genre)) %>% 
+  mutate(genre = str_extract(genre, "\\w+"), 
+         genre = fct_lump_min(genre, 30)) %>% 
+  count(year, genre)
+
+filmes_ano_genero <- movies_genero_ano %>% 
+  ggplot(aes(x=year, y=n, group=genre, fill=genre)) +
+    labs(
+    x = "Anos",
+    y = "Número de filmes",
+    title = "Número de filmes lançados por gênero",
+    subtitle = "1970-2013")+
+  geom_area(alpha=0.7, size=.5, colour="white") +
+  scale_fill_viridis(discrete = TRUE) +
+  theme(legend.position="none") +
+  theme_xaringan() +
+  theme(
+    panel.spacing = unit(0.1, "lines"),
+    strip.text.x = element_text(size = 6),
+    plot.title = element_text(size=18),
+    plot.subtitle = element_text(size=10),
+    legend.title = element_text(size = 10),
+    legend.text = element_text(size = 7),
+    axis.text=element_text(size=10),
+    axis.title=element_text(size=12,face="bold")
+  ) +
+  facet_wrap(~genre)
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', fig.height=3.5, fig.width=8, fig.retina=3, fig.align='center'}
+filmes_ano_genero
+```
+
+Os gêneros de ação, comédia e drama tiveram um aumento relativamente parecido com a curva geral da produção cinematográfica vista no gráfico anterior. Os filmes de terror tiveram um pico de interesse nas décadas de 70 e 80, retomado nos anos 2000. Já os filmes dos gêneros biografia e aventura só tiveram um aumento em sua produção após os anos 2000.
+---
+background-color: #FFF5DC
+
+class:  left
+## Resultado do teste de Bechdel-Wallace por gênero
+
+```{r echo=FALSE}
+
+movies_genero <- movies %>%
+  filter(!is.na(genre)) %>% 
+  filter(!country=="USA") %>% 
+  mutate(genre = str_extract(genre, "\\w+"), 
+         genre = fct_lump_min(genre, 20)) %>% 
+  count(genre, binary)
+
+genero_bw <- ggplot(movies_genero, aes(fill = binary, values = n)) +
+  geom_waffle(color = "white", size = .25, n_rows = 10, flip = TRUE, show.legend = TRUE) +
+  facet_wrap(~fct_reorder(genre, -n), nrow = 1, strip.position = "bottom") +
+  scale_x_discrete() + 
+  scale_y_continuous(labels = function(x) x * 10, # multiplicar para a escala de Y refletir o número de filmes
+                     expand = c(0,0)) +
+  scale_fill_manual(values = c(cores[["fail"]], cores[["pass"]]), name = "Resultado", 
+                    labels = c("Falha", "Sucesso")) +
+  coord_equal() +
+  labs(
+    title = "Filmes por gênero e o teste de Bechdel-Wallace",
+    subtitle = "1970-2013",
+    x = NULL,
+    y = NULL,
+    caption = "Feito com base no gráfico de Luis Freites(https://github.com/luisfrein/R_Tidytuesday)")+
+  theme_xaringan() + 
+    theme(
+    panel.spacing = unit(0.1, "lines"),
+    strip.text.x = element_text(size = 6),
+    plot.title = element_text(size=18),
+    plot.subtitle = element_text(size=10),
+    legend.title = element_text(size = 10),
+    legend.text = element_text(size = 7),
+    plot.caption = element_text(size = 6),
+    axis.text=element_text(size=10),
+    axis.title=element_text(size=12,face="bold"),
+    panel.background = element_rect(fill = "white"),
+    plot.background= element_rect(fill = "#ffffff"),
+    legend.background = element_rect(fill = "#ffffff"))
+
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='90%', fig.height=2.5, fig.width=8, fig.retina=3, fig.align='center'}
+genero_bw
+```
+O gênero dos filmes de ação não somente é o mais produzido, mas também com o maior número de filmes que falham no teste de Bechdel-Wallace. Já os filmes de drama se encontram divididos praticamente meio a meio em relação ao sucesso no teste de teste de Bechdel-Wallace, enquanto no gênero de comédia a maior parte dos filmes passa no teste. 
+O resultado de dois gêneros chamou a atenção: a boa performance dos filmes de terror no teste de Bechdel-Wallace, e no sentido contrário, o baixo percentual de filmes de animação que passam no teste.
+---
+background-image: url("https://media.giphy.com/media/26BRzQS5HXcEWM7du/giphy.gif")
+background-size: cover
+
+class: center,middle, inverse
+
+#__<span style="color: white;">Parte 2: Batalha de franquias!</span>.__
+
+---
+class: inverse,left
+
+# Regras da batalha de franquias
+
+~~A primeira regra da batalha de franquias é: você não fala sobre a batalha de franquias.~~
+
+A batalha de franquias funciona asssim: agrupamos os filmes de duas séries de um mesmo gênero, e calculamos a média das notas no teste de Bechdel-Wallace de cada franquia para definir a vencedora. 
+
+Na maioria dos casos foi possível listar todos os filmes de uma franquia, com exceção para a batalha dos super-heróis (Marvel e DC): como esses personagens tem sido representados no cinema desde a década de 1970, optamos por analisar apenas os filmes produzidos após 2005 (quando os filmes de super-heróis explodiram).
+
+Sobre a pontuação de cada filme, ela consta na própria base _raw bechdel_, e foi calculada da seguinte forma:
+
+1. O filme tem pelo menos duas personagens do sexo feminino (1 ponto)
+1. As personagens femininas conversam uma com a outra (2 pontos)
+1. A conversa é sobre alguma coisa que não seja um homem (3 pontos)
+
+---
+class: center,inverse
+
+## Batalha 1: Séries de fantasia 
+
+.pull-left[
+<img src="https://media.giphy.com/media/fX8771PO1eATJz6r4R/giphy.gif" width="95%" />
+]
+--
+.pull-right[ 
+<img src="https://media.giphy.com/media/S6sZaHdqsGYFO/giphy.gif" width="100%"/>
+]
+
+---
+A média da nota no teste de Bechdel-Wallace dos filmes da franquia _Harry Potter_ foi de excelente __2.7__. Por sua vez, os filmes do univeso de _Senhor dos Anéis_ tiveram um resultado pífio de __1.5__, com o primeiro filme da trilogia do _Hobbit_ se destacando por não ter sequer duas personagens femininas que conversam entre si...
+
+```{r echo=FALSE,  message=FALSE, warning=FALSE}
+
+batalha_franquias <- raw_bechdel %>% 
+  mutate(franquia = case_when(str_detect(title, "Harry Potter") ~ "Harry Potter"))
+
+batalha_franquias <-batalha_franquias %>% 
+  mutate(franquia = case_when(
+    title %in% c("Fantastic Beasts: The Crimes of Grindelwald", 
+                 "Fantastic Beasts and Where to Find Them",
+                 "Harry Potter and the Sorcerer’s Stone",
+                 "Harry Potter and the Chamber of Secrets",
+                 "Harry Potter and the Prisoner of  Azkaban",
+                 "Harry Potter and the Goblet of Fire",
+                 "Harry Potter and the Order of the Phoenix",
+                 "Harry Potter and the Half-Blood Prince",
+                 "Harry Potter and the Deathly Hallows: Part 1",
+                 "Harry Potter and the Deathly Hallows: Part 2") ~ "Harry Potter"))
+
+batalha_franquias <-batalha_franquias %>% 
+  mutate(franquia = case_when(
+    title %in% c("The Lord of the Rings: The Fellowship of the Ring",
+                 "The Lord of the Rings: The Two Towers",
+                 "The Lord of the Rings: The Return of the King",
+                 "The Hobbit: An Unexpected Journey",
+                 "The Hobbit: The Desolation of Smaug",
+                 "The Hobbit: The Battle of the Five Armies") ~ "Lord of the Rings",
+    TRUE ~ as.character(franquia)))
+
+hp_lotr <- batalha_franquias %>%
+  filter(franquia %in% c('Lord of the Rings', "Harry Potter"))
+
+
+hp_lotr <- ggdotchart(hp_lotr, x = "title", y = "rating",
+           color = "franquia",                                
+           palette = c("#00AFBB", "#E7B800", "#FC4E07"), # Custom color palette
+           sorting = "descending",                       
+           rotate = TRUE,                                
+           dot.size = 8,                                
+           group = "franquia", 
+           y.text.col = TRUE,
+           label = round(hp_lotr$rating),                       
+           font.label = list(color = "white", size = 10, 
+                             vjust = 0.4),             # Color y text by groups
+           ggtheme = theme_xaringan())+
+  labs(
+    x = NULL,
+    y = "Nota de cada filme")+
+  theme_cleveland()+                                       # Add dashed grids
+  theme(
+    panel.spacing = unit(0.1, "lines"),
+    strip.text.x = element_text(size = 6),
+    plot.title = element_text(size=18),
+    plot.subtitle = element_text(size=10),
+    legend.title = element_text(size = 10),
+    legend.text = element_text(size = 7),
+    plot.caption = element_text(size = 6),
+    axis.text=element_text(size=10),
+    axis.title=element_text(size=12,face="bold"))
+
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', fig.width = 10, fig.height = 5, fig.retina=3, fig.align='center'}
+hp_lotr
+```
+
+---
+background-image: url("https://media.giphy.com/media/131szFis2sG4QE/giphy.gif")
+background-size: cover
+---
+class: center,inverse
+
+## Batalha 2: Séries (mais ou menos) de ficção científica 
+
+.pull-left[
+<img src="https://media.giphy.com/media/WguWJLy1vi1fq/giphy.gif" width="100%" />
+]
+--
+.pull-right[ 
+<img src="https://media.giphy.com/media/cK0QSfVaTl62A/giphy.gif" width="80%"/>
+]
+
+---
+Ambas as franquias tiveram notas parecedidas, com a vítória por pouco dos filmes do universo de _Star Wars_, com uma média de **2.08**, enquanto os filmes de _Star Trek_ tiveram a média da nota no teste de Bechdel-Wallace dos filmes de __2__. Ainda assim, o destaque negativo é _Star Wars: Episode V - The Empire Strikes Back_ com 0 pontos (!), ou seja, não conta sequer com 2 personagens femininas relevantes!
+
+```{r echo=FALSE,  message=FALSE, warning=FALSE}
+
+batalha_franquias <-batalha_franquias %>% 
+  mutate(franquia = case_when(
+    title %in% c("Star Wars", "The Star Wars Holiday Special", "Star Wars: Episode V - The Empire Strikes Back",
+                 "Star Wars: Episode VI - Return of the Jedi", "Star Wars: Episode I - The Phantom Menace",
+                 "Star Wars: Episode II - Attack of the Clones", "Star Wars: Episode III - Revenge of the Sith",
+                 "Star Wars: Revelations", "Star Wars: The Force Awakens", "Star Wars: The Last Jedi", "Rogue One",
+                 "Solo: A Star Wars Story", "Star Wars: Episode IX - The Rise of Skywalker") ~ "Star Wars",
+     TRUE ~ as.character(franquia)))
+
+batalha_franquias <-batalha_franquias %>% 
+  mutate(franquia = case_when(
+    title %in% c("Star Trek: The Motion Picture", "Star Trek: The Wrath of Khan", 
+    "Star Trek III: The Search for Spock", "Star Trek IV:  The Voyage Home", "Star Trek V: The Final Frontier",
+    "Star Trek VI: The Undiscovered Country", "Star Trek Generations", "Star Trek: First Contact",
+    "Star Trek: Insurrection", "Star Trek: Nemesis", "Star Trek", "Star Trek Into Darkness",
+    "Star Trek Beyond") ~ "Star Trek",
+    TRUE ~ as.character(franquia)))
+
+sw_st <- batalha_franquias %>%
+  filter(franquia %in% c('Star Wars', "Star Trek"))
+
+
+sw_st <- ggdotchart(sw_st, x = "title", y = "rating",
+           color = "franquia",                                # Color by groups
+           palette = c("#00AFBB", "#E7B800", "#FC4E07"), # Custom color palette
+           sorting = "descending",                       # Sort value in descending order
+           rotate = TRUE,                                # Rotate vertically
+           dot.size = 8,                                 # Large dot size
+           group = "franquia", 
+           y.text.col = TRUE,
+           label = round(sw_st$rating),                        # Add mpg values as dot labels
+           font.label = list(color = "white", size = 10, 
+                             vjust = 0.4),             # Color y text by groups
+           ggtheme = theme_xaringan())+
+    labs(
+    x = NULL,
+    y = "Nota de cada filme")+
+  theme_cleveland()+
+    theme(
+    panel.spacing = unit(0.1, "lines"),
+    strip.text.x = element_text(size = 6),
+    plot.title = element_text(size=18),
+    plot.subtitle = element_text(size=10),
+    legend.title = element_text(size = 10),
+    legend.text = element_text(size = 7),
+    plot.caption = element_text(size = 6),
+    axis.text=element_text(size=10),
+    axis.title=element_text(size=12,face="bold"))
+
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='90%', fig.width = 10, fig.height = 5, fig.retina=3, fig.align='center'}
+sw_st
+```
+
+---
+background-image: url("https://media.giphy.com/media/mP47tgdWChow8/giphy.gif")
+background-size: cover
+---
+class: center,inverse
+
+## Batalha 3: Filmes de ação desmiolados
+
+.pull-left[
+<img src="https://media.giphy.com/media/5xtDarsLW7vkDxAixxK/giphy.gif" width="100%" />
+]
+--
+.pull-right[ 
+<img src="https://media.giphy.com/media/10KL1QSQNsyEZa/giphy.gif" width="100%"/>
+]
+---
+
+Contrariando as expectativas, as duas franquias tiveram notas relativamente favoráveis, com a vitória da série _Transformers_, que obteve uma média de __2.29__ no teste de Bechdel-Wallace, enquanto os filmes do universo de _Fast & Furious_ registraram uma nota média de __2__. O pior filme de todo o grupo foi a animação _The Transformers: The Movie_ de 1986.
+
+```{r echo=FALSE,  message=FALSE, warning=FALSE}
+
+batalha_franquias <-batalha_franquias %>% 
+  mutate(franquia = case_when(
+    title %in% c("2 Fast 2 Furious", "The Fast and the Furious: Tokyo Drift", "Fast Five", "Fast and Furious 6",
+                 "Furious 7", "The Fate of the Furious") ~ "Fast and Furious",
+     TRUE ~ as.character(franquia)))
+
+batalha_franquias <-batalha_franquias %>% 
+  mutate(franquia = case_when(
+    id %in% c("5200", "2401", "8808") ~ "Fast and Furious",
+     TRUE ~ as.character(franquia)))
+
+batalha_franquias <-batalha_franquias %>% 
+  mutate(franquia = case_when(
+    title %in% c("The Transformers: The Movie", "Transformers", "Transformers: Revenge of the Fallen", 
+                 "Transformers: Dark of the Moon", "Transformers: Age of Extinction", 
+                 "Transformers: The Last Knight", "Bumblebee") ~ "Transformers",
+    TRUE ~ as.character(franquia)))
+
+ff_trf <- batalha_franquias %>%
+  filter(franquia %in% c('Fast and Furious', "Transformers"))
+
+
+ff_trf <- ggdotchart(ff_trf, x = "title", y = "rating",
+           color = "franquia",                                # Color by groups
+           palette = c("#00AFBB", "#E7B800", "#FC4E07"), # Custom color palette
+           sorting = "descending",                       # Sort value in descending order
+           rotate = TRUE,                                # Rotate vertically
+           dot.size = 8,                                 # Large dot size
+           group = "franquia", 
+           y.text.col = TRUE,
+           label = round(ff_trf$rating),                        # Add mpg values as dot labels
+           font.label = list(color = "white", size = 10, 
+                             vjust = 0.4),             # Color y text by groups
+           ggtheme = theme_xaringan())+
+    labs(
+    x = NULL,
+    y = "Nota de cada filme")+
+  theme_cleveland()+
+    theme(
+    panel.spacing = unit(0.1, "lines"),
+    strip.text.x = element_text(size = 6),
+    plot.title = element_text(size=18),
+    plot.subtitle = element_text(size=10),
+    legend.title = element_text(size = 10),
+    legend.text = element_text(size = 7),
+    plot.caption = element_text(size = 6),
+    axis.text=element_text(size=10),
+    axis.title=element_text(size=12,face="bold"))
+
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='90%', fig.width = 10, fig.height = 5, fig.retina=3, fig.align='center'}
+ff_trf
+```
+
+---
+background-image: url("https://media.giphy.com/media/R9zXHWAHyTjnq/giphy.gif")
+background-size: cover
+
+---
+class: center,inverse
+
+## Batalha 4: Filmes de ficção/monstro
+
+.pull-left[
+<img src="https://media.giphy.com/media/UPgCwaZODQAYo/giphy.gif" width="90%" />
+]
+--
+.pull-right[ 
+<img src="https://media.giphy.com/media/BvsKJXGzqfNPq/giphy.gif" width="70%"/>
+]
+---
+A série _Alien_ se destaca não apenas por sua icônica protagonista Ellen Ripley, mas também pela excelente média de __2.75__ no teste de Bechdel-Wallace (salvo pelo filme _Alien:3_). Por sua vez, os filmes da série _Predador_, com seus protagonistas brucutus, não passa pelo teste de Bechdel-Wallace uma única 
+vez, e teve média de apenas __0.75__.
+
+Temos também dois filmes que contam em ambas franquias: _AVP: Alien vs. Predator_ e _Aliens vs. Predator: Requiem_, os dois com nota 3 (ou seja, passam completamente) no teste de Bechdel-Wallace.
+
+```{r echo=FALSE,  message=FALSE, warning=FALSE}
+
+batalha_franquias <-batalha_franquias %>% 
+  mutate(franquia = case_when(
+    title %in% c("Alien", "Aliens", "Alien 3", "Alien: Resurrection", "Alien: Covenant", "Prometheus") ~ "Alien",
+     TRUE ~ as.character(franquia)))
+
+batalha_franquias <-batalha_franquias %>% 
+  mutate(franquia = case_when(
+    title %in% c("Predator", "Predator 2", "Predators", "The Predator") ~ "Predator",
+    TRUE ~ as.character(franquia)))
+
+al_pre <- batalha_franquias %>%
+  filter(franquia %in% c('Alien', "Predator"))
+
+
+al_pre <- ggdotchart(al_pre, x = "title", y = "rating",
+           color = "franquia",                                # Color by groups
+           palette = c("#00AFBB", "#E7B800", "#FC4E07"), # Custom color palette
+           sorting = "descending",                       # Sort value in descending order
+           rotate = TRUE,                                # Rotate vertically
+           dot.size = 8,                                 # Large dot size
+           group = "franquia", 
+           y.text.col = TRUE,
+           label = round(al_pre$rating),                        # Add mpg values as dot labels
+           font.label = list(color = "white", size = 10, 
+                             vjust = 0.4),             # Color y text by groups
+           ggtheme = theme_xaringan())+
+    labs(
+    x = NULL,
+    y = "Nota de cada filme")+
+  theme_cleveland()+
+    theme(
+    panel.spacing = unit(0.1, "lines"),
+    strip.text.x = element_text(size = 6),
+    plot.title = element_text(size=18),
+    plot.subtitle = element_text(size=10),
+    legend.title = element_text(size = 10),
+    legend.text = element_text(size = 7),
+    plot.caption = element_text(size = 6),
+    axis.text=element_text(size=10),
+    axis.title=element_text(size=12,face="bold"))                        # Add dashed grids
+
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', fig.width = 10, fig.height = 5, fig.retina=3, fig.align='center'}
+al_pre
+```
+
+---
+background-image: url("https://media.giphy.com/media/AwVTm5oih57UI/giphy.gif")
+background-size: cover
+
+---
+class: center,inverse
+
+## Batalha 5: Filmes de terror
+
+.pull-left[
+<img src="https://media.giphy.com/media/sZlPeAYn3QXCM/giphy.gif" width="100%" />
+]
+--
+.pull-right[ 
+<img src="https://media.giphy.com/media/ZLNJcUcndjB4s/giphy.gif" width="70%"/>
+]
+---
+O gênero do terror se destaca pela alta proporção de filmes que passam no teste de Bechdel-Wallace, e suas duas séries icônicas demonstram bem isso. Os filmes de _A Nightmare on Elm Street _ tiveram uma nota média de __2.88__, enquanto os filmes de Jason Voorhees registraram uma média de __2.75__. Nenhum dos 15 filmes das duas franquias teve nota menor que 2! (E sim, o terrível _Freddy vs. Jason_ também teve nota 3...)
+
+```{r echo=FALSE,  message=FALSE, warning=FALSE}
+
+batalha_franquias <-batalha_franquias %>% 
+  mutate(franquia = case_when(
+    title %in% c("A nightmare on Elm Street", "A Nightmare on Elm Street 2: Freddy’s Revenge", 
+                 "A Nightmare on Elm Street 3: Dream Warriors", "A Nightmare on Elm Street 4: The Dream Master",
+                 "A Nightmare on Elm Street 5: The Dream Child", "Freddy’s Dead: The Final Nightmare", 
+                 "New Nightmare", "A Nightmare on Elm Street" ) ~ "A Nightmare on Elm Street",
+     TRUE ~ as.character(franquia)))
+
+batalha_franquias <-batalha_franquias %>% 
+  mutate(franquia = case_when(
+    title %in% c("Friday the 13th", "Friday the 13th Part 2", "Friday the 13th Part III", 
+    "Friday the 13th Part IV: The Final Chapter", "Friday the 13th: A New Beginning", 
+    "Friday the 13th Part VIII: Jason Takes Manhattan", "Friday the 13th Part VIII: Jason Takes Manhattan",
+    "Jason X", "Friday the 13th") ~ "Friday the 13th",
+    TRUE ~ as.character(franquia)))
+
+
+nm_13 <- batalha_franquias %>%
+  filter(franquia %in% c('A Nightmare on Elm Street', "Friday the 13th"))
+
+
+nm_13 <- ggdotchart(nm_13, x = "title", y = "rating",
+           color = "franquia",                                # Color by groups
+           palette = c("#00AFBB", "#E7B800", "#FC4E07"), # Custom color palette
+           sorting = "descending",                       # Sort value in descending order
+           rotate = TRUE,                                # Rotate vertically
+           dot.size = 8,                                 # Large dot size
+           group = "franquia", 
+           y.text.col = TRUE,
+           label = round(nm_13$rating),                        # Add mpg values as dot labels
+           font.label = list(color = "white", size = 10, 
+                             vjust = 0.4),             # Color y text by groups
+          ggtheme = theme_xaringan())+
+    labs(
+    x = NULL,
+    y = "Nota de cada filme")+
+  theme_cleveland()+
+    theme(
+    panel.spacing = unit(0.1, "lines"),
+    strip.text.x = element_text(size = 6),
+    plot.title = element_text(size=18),
+    plot.subtitle = element_text(size=10),
+    legend.title = element_text(size = 10),
+    legend.text = element_text(size = 7),
+    plot.caption = element_text(size = 6),
+    axis.text=element_text(size=10),
+    axis.title=element_text(size=12,face="bold"))                                    # Add dashed grids
+
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='90%', fig.width = 10, fig.height = 5, fig.retina=3, fig.align='center'}
+nm_13
+```
+
+---
+background-image: url("https://media.giphy.com/media/3o6Ztc3TPm4B1uhw08/giphy.gif")
+background-size: cover
+
+---
+class: center,inverse
+
+## Batalha 6: Filmes de super-heróis!
+
+.pull-left[
+<img src="https://media.giphy.com/media/kwdUohHQSdLU3hhZ9s/giphy.gif" width="100%" />
+]
+--
+.pull-right[ 
+<img src="https://media.giphy.com/media/LpFUlXjd4QHsWmY8Ji/giphy.gif" width="100%"/>
+]
+---
+Finalmente o gênero de filmes que tomaram de assalto o cinema nos últimos 15 anos! Os filmes de super-heróis já existiam, mas desde meados dos anos 2000 se tornaram parte central da indústria do cinema. Os filmes do universo _Marvel_ tiveram uma média de __2.52__ no teste de Bechdel-Wallace, enquanto as produções da _DC_ tiveram uma média de __2.67__. De forma geral, dois terços dos filmes de super-heróis dos últimos 15 anos passou plenamente no teste. 
+
+```{r echo=FALSE,  message=FALSE, warning=FALSE}
+
+batalha_franquias <-batalha_franquias %>% 
+  mutate(franquia = case_when(
+    title %in% c("Iron Man", "Iron Man 2", "Iron Man 3","Incredible Hulk", "Thor", "Thor: The Dark World",
+                 "Thor: Ragnarok", "Captain America: The First Avenger", "Captain America: The Winter Soldier",
+                 "Captain America: Civil War", "Avengers: Age of Ultron", "Avengers: Infinity War", 
+                 "Avengers: Endgame", "Guardians of the Galaxy", "Guardians of the Galaxy Vol. 2", "Ant-Man",
+                 "Ant-Man and the Wasp", "Doctor Strange", "Spider-Man: Homecoming", "Black Panther", 
+                 "Captain Marvel") ~ "Marvel",
+     TRUE ~ as.character(franquia)))
+
+batalha_franquias <-batalha_franquias %>% 
+  mutate(franquia = case_when(
+    id %in% "3205" ~ "Marvel",
+     TRUE ~ as.character(franquia)))
+
+batalha_franquias <-batalha_franquias %>% 
+  mutate(franquia = case_when(
+    title %in% c("Batman Begins", "The Dark Knight", "The Dark Knight Rises", "Man of Steel",
+                 "Batman v Superman: Dawn of Justice", "Justice League", "Suicide Squad", "Wonder Woman",
+                 "Aquaman", "Wonder Woman 1984", "Shazam!", "Birds of Prey") ~ "DC",
+    TRUE ~ as.character(franquia)))
+
+
+mar_dc <- batalha_franquias %>%
+  filter(franquia %in% c("Marvel", "DC"))
+
+
+mar_dc <- ggdotchart(mar_dc, x = "title", y = "rating",
+           color = "franquia",                                # Color by groups
+           palette = c("#00AFBB", "#E7B800", "#FC4E07"), # Custom color palette
+           sorting = "descending",                       # Sort value in descending order
+           rotate = TRUE,                                # Rotate vertically
+           dot.size = 8,                                 # Large dot size
+           group = "franquia", 
+           y.text.col = TRUE,
+           label = round(mar_dc$rating),                        # Add mpg values as dot labels
+           font.label = list(color = "white", size = 10, 
+                             vjust = 0.4),             # Color y text by groups
+        ggtheme = theme_xaringan())+
+    labs(
+    x = NULL,
+    y = "Nota de cada filme")+
+  theme_cleveland()+
+    theme(
+    panel.spacing = unit(0.1, "lines"),
+    strip.text.x = element_text(size = 6),
+    plot.title = element_text(size=18),
+    plot.subtitle = element_text(size=10),
+    legend.title = element_text(size = 10),
+    legend.text = element_text(size = 7),
+    plot.caption = element_text(size = 6),
+    axis.text=element_text(size=10),
+    axis.title=element_text(size=12,face="bold"))                                      # Add dashed grids
+
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', fig.width = 10, fig.height = 5, fig.retina=3, fig.align='center'}
+mar_dc
+```
+
+---
+background-image: url("https://media.giphy.com/media/dYgfd374hlTz6uF772/giphy.gif")
+background-size: cover
+---
+## Resultado da batalha de franquias
+
+```{r echo=FALSE}
+
+ranking <- batalha_franquias %>% 
+    group_by(franquia) %>% 
+  summarize(Nota = mean(rating, na.rm = TRUE)) %>% 
+  arrange(desc(Nota)) %>% 
+  na.omit %>% 
+  mutate(Rank = dense_rank(desc(Nota)))
+  
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='20%', fig.width = 10, fig.height = 5, fig.retina=3, fig.align='center'}
+
+knitr::kable(x = ranking, format = "html", digits = 2, longtable = TRUE, caption = "Ranking das franquias analisadas")
+```
+---
+### Considerações sobre o exercício
+
+É interessante como o teste de Bechdel-Wallace, ainda que uma sacada excelente, é focado na existência da representação feminina, embora a qualidade dessa possa ser duvidosa. Assim, filmes como da série _Transformers_ tiveram uma nota até razoável (ocupando a sétima posição no geral), ainda que as protagonistas femininas sejam representadas de maneira um tanto tosca e objetificada. 
+
+Ainda assim, o exercício foi extremamente interessante para ressaltar como filmes clássicos e de grande sucesso sequer conseguem ter o mínimo necessário - _duas personagens relevantes do sexo feminino!_ - e de forma geral, isso não é uma grande questão para críticos e o público.
+

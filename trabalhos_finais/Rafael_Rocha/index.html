@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Teste de Bechdel-Wallace e a Representação de gênero na indústria cinematográfica</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Rafael Rocha" />
+    <meta name="date" content="2021-10-04" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: top, left, inverse, title-slide
+
+# Teste de Bechdel-Wallace e a Representação de gênero na indústria cinematográfica
+## Exercício final do curso de Visualização de Dados
+### Rafael Rocha
+### 10/04/2021
+
+---
+
+
+
+
+
+
+
+class: inverse,left
+
+# O teste de Bechdel-Wallace
+
+O teste de Bechdel, busca avaliar a representação feminina nas obras de ficção. Para passar no
+teste, uma obra deve satisfazer 3 critérios:
+
+1. Deve ter pelo menos duas personagens do sexo feminino
+1. Elas devem conversar uma com a outra
+1. A conversa deve ser sobre alguma coisa que não seja um homem
+
+O teste recebe o nome em homenagem à cartunista norte-americana Alison Bechdel. Em 1985, uma personagem de seus quadrinhos _Dykes to Watch Out For_ expressou a ideia, que a autora atribuiu a sua amiga Liz Wallace, sendo conhecido também como teste de Bechdel-Wallace.
+
+---
+class:  left
+
+# Objetivo:
+
+Este trabalho tem como objetivo explorar as bases de dados de filmes lançados nas últimas décadas, com ênfase especialmente na representação de gênero à partir dos resultados da aplicação do teste de de Bechdel-Wallace. Serão utilizadas duas bases de dados:
+
+__Movies__: base com dados de **1794 filmes** lançados entre os anos de 1970 e 2013. A base contém dados sobre o orçamento e arrecadação dos filmes, gêneros, atores e diretores envolvidos, além do resultado do teste Bechdel-Wallace para cada filme. 
+
+__Raw_bechdel__: base com dados de **8839 filmes** lançados entre os anos de 1888 e 2021, mas apenas com os dados acerca do título do filme, seu registro no IMDB e sua nota no teste Bechdel-Wallace (0 = falha, 3 = sucesso).
+
+O trabalho é dividido em duas partes. A primeira parte apresenta um perfil mais geral dos filmes lançados entre 1970 e 2013, e de como eles representam as personagens do sexo feminino, a partir da base *Movies*. A segunda parte (mais divertida!), compara 12 franquias de filmes entre si, para mensurar quais tiveram o melhor desempenho no teste de Bechdel-Wallace, e utiliza a base *Raw_bechdel*, por ser mais atual.
+
+---
+class: center,middle
+
+#__Parte 1: Análise geral__
+---
+class:  left
+## Filmes lançados por ano e o teste de Bechdel-Wallace
+
+
+
+&lt;img src="index_files/figure-html/unnamed-chunk-2-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+O gráfico acima evidencia dois elementos centrais: o intenso aumento do volume de filmes lançados, principalmente à partir da metade da década de 90; e como, independente do aumento no volume das produções cinematográficas, a proporção de filmes que passam no teste de Bechdel-Wallace sempre se manteve muito inferior aqueles quem falham no teste. 
+---
+class: left
+## Número de filmes lançados por gênero
+
+
+
+&lt;img src="index_files/figure-html/unnamed-chunk-4-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+Os gêneros de ação, comédia e drama tiveram um aumento relativamente parecido com a curva geral da produção cinematográfica vista no gráfico anterior. Os filmes de terror tiveram um pico de interesse nas décadas de 70 e 80, retomado nos anos 2000. Já os filmes dos gêneros biografia e aventura só tiveram um aumento em sua produção após os anos 2000.
+---
+background-color: #FFF5DC
+
+class:  left
+## Resultado do teste de Bechdel-Wallace por gênero
+
+
+
+&lt;img src="index_files/figure-html/unnamed-chunk-6-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+O gênero dos filmes de ação não somente é o mais produzido, mas também com o maior número de filmes que falham no teste de Bechdel-Wallace. Já os filmes de drama se encontram divididos praticamente meio a meio em relação ao sucesso no teste de teste de Bechdel-Wallace, enquanto no gênero de comédia a maior parte dos filmes passa no teste. 
+O resultado de dois gêneros chamou a atenção: a boa performance dos filmes de terror no teste de Bechdel-Wallace, e no sentido contrário, o baixo percentual de filmes de animação que passam no teste.
+---
+background-image: url("https://media.giphy.com/media/26BRzQS5HXcEWM7du/giphy.gif")
+background-size: cover
+
+class: center,middle, inverse
+
+#__&lt;span style="color: white;"&gt;Parte 2: Batalha de franquias!&lt;/span&gt;.__
+
+---
+class: inverse,left
+
+# Regras da batalha de franquias
+
+~~A primeira regra da batalha de franquias é: você não fala sobre a batalha de franquias.~~
+
+A batalha de franquias funciona asssim: agrupamos os filmes de duas séries de um mesmo gênero, e calculamos a média das notas no teste de Bechdel-Wallace de cada franquia para definir a vencedora. 
+
+Na maioria dos casos foi possível listar todos os filmes de uma franquia, com exceção para a batalha dos super-heróis (Marvel e DC): como esses personagens tem sido representados no cinema desde a década de 1970, optamos por analisar apenas os filmes produzidos após 2005 (quando os filmes de super-heróis explodiram).
+
+Sobre a pontuação de cada filme, ela consta na própria base _raw bechdel_, e foi calculada da seguinte forma:
+
+1. O filme tem pelo menos duas personagens do sexo feminino (1 ponto)
+1. As personagens femininas conversam uma com a outra (2 pontos)
+1. A conversa é sobre alguma coisa que não seja um homem (3 pontos)
+
+---
+class: center,inverse
+
+## Batalha 1: Séries de fantasia 
+
+.pull-left[
+&lt;img src="https://media.giphy.com/media/fX8771PO1eATJz6r4R/giphy.gif" width="95%" /&gt;
+]
+--
+.pull-right[ 
+&lt;img src="https://media.giphy.com/media/S6sZaHdqsGYFO/giphy.gif" width="100%"/&gt;
+]
+
+---
+A média da nota no teste de Bechdel-Wallace dos filmes da franquia _Harry Potter_ foi de excelente __2.7__. Por sua vez, os filmes do univeso de _Senhor dos Anéis_ tiveram um resultado pífio de __1.5__, com o primeiro filme da trilogia do _Hobbit_ se destacando por não ter sequer duas personagens femininas que conversam entre si...
+
+
+
+&lt;img src="index_files/figure-html/unnamed-chunk-8-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+background-image: url("https://media.giphy.com/media/131szFis2sG4QE/giphy.gif")
+background-size: cover
+---
+class: center,inverse
+
+## Batalha 2: Séries (mais ou menos) de ficção científica 
+
+.pull-left[
+&lt;img src="https://media.giphy.com/media/WguWJLy1vi1fq/giphy.gif" width="100%" /&gt;
+]
+--
+.pull-right[ 
+&lt;img src="https://media.giphy.com/media/cK0QSfVaTl62A/giphy.gif" width="80%"/&gt;
+]
+
+---
+Ambas as franquias tiveram notas parecedidas, com a vítória por pouco dos filmes do universo de _Star Wars_, com uma média de **2.08**, enquanto os filmes de _Star Trek_ tiveram a média da nota no teste de Bechdel-Wallace dos filmes de __2__. Ainda assim, o destaque negativo é _Star Wars: Episode V - The Empire Strikes Back_ com 0 pontos (!), ou seja, não conta sequer com 2 personagens femininas relevantes!
+
+
+
+&lt;img src="index_files/figure-html/unnamed-chunk-10-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+background-image: url("https://media.giphy.com/media/mP47tgdWChow8/giphy.gif")
+background-size: cover
+---
+class: center,inverse
+
+## Batalha 3: Filmes de ação desmiolados
+
+.pull-left[
+&lt;img src="https://media.giphy.com/media/5xtDarsLW7vkDxAixxK/giphy.gif" width="100%" /&gt;
+]
+--
+.pull-right[ 
+&lt;img src="https://media.giphy.com/media/10KL1QSQNsyEZa/giphy.gif" width="100%"/&gt;
+]
+---
+
+Contrariando as expectativas, as duas franquias tiveram notas relativamente favoráveis, com a vitória da série _Transformers_, que obteve uma média de __2.29__ no teste de Bechdel-Wallace, enquanto os filmes do universo de _Fast &amp; Furious_ registraram uma nota média de __2__. O pior filme de todo o grupo foi a animação _The Transformers: The Movie_ de 1986.
+
+
+
+&lt;img src="index_files/figure-html/unnamed-chunk-12-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+background-image: url("https://media.giphy.com/media/R9zXHWAHyTjnq/giphy.gif")
+background-size: cover
+
+---
+class: center,inverse
+
+## Batalha 4: Filmes de ficção/monstro
+
+.pull-left[
+&lt;img src="https://media.giphy.com/media/UPgCwaZODQAYo/giphy.gif" width="90%" /&gt;
+]
+--
+.pull-right[ 
+&lt;img src="https://media.giphy.com/media/BvsKJXGzqfNPq/giphy.gif" width="70%"/&gt;
+]
+---
+A série _Alien_ se destaca não apenas por sua icônica protagonista Ellen Ripley, mas também pela excelente média de __2.75__ no teste de Bechdel-Wallace (salvo pelo filme _Alien:3_). Por sua vez, os filmes da série _Predador_, com seus protagonistas brucutus, não passa pelo teste de Bechdel-Wallace uma única 
+vez, e teve média de apenas __0.75__.
+
+Temos também dois filmes que contam em ambas franquias: _AVP: Alien vs. Predator_ e _Aliens vs. Predator: Requiem_, os dois com nota 3 (ou seja, passam completamente) no teste de Bechdel-Wallace.
+
+
+
+&lt;img src="index_files/figure-html/unnamed-chunk-14-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+background-image: url("https://media.giphy.com/media/AwVTm5oih57UI/giphy.gif")
+background-size: cover
+
+---
+class: center,inverse
+
+## Batalha 5: Filmes de terror
+
+.pull-left[
+&lt;img src="https://media.giphy.com/media/sZlPeAYn3QXCM/giphy.gif" width="100%" /&gt;
+]
+--
+.pull-right[ 
+&lt;img src="https://media.giphy.com/media/ZLNJcUcndjB4s/giphy.gif" width="70%"/&gt;
+]
+---
+O gênero do terror se destaca pela alta proporção de filmes que passam no teste de Bechdel-Wallace, e suas duas séries icônicas demonstram bem isso. Os filmes de _A Nightmare on Elm Street _ tiveram uma nota média de __2.88__, enquanto os filmes de Jason Voorhees registraram uma média de __2.75__. Nenhum dos 15 filmes das duas franquias teve nota menor que 2! (E sim, o terrível _Freddy vs. Jason_ também teve nota 3...)
+
+
+
+&lt;img src="index_files/figure-html/unnamed-chunk-16-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+background-image: url("https://media.giphy.com/media/3o6Ztc3TPm4B1uhw08/giphy.gif")
+background-size: cover
+
+---
+class: center,inverse
+
+## Batalha 6: Filmes de super-heróis!
+
+.pull-left[
+&lt;img src="https://media.giphy.com/media/kwdUohHQSdLU3hhZ9s/giphy.gif" width="100%" /&gt;
+]
+--
+.pull-right[ 
+&lt;img src="https://media.giphy.com/media/LpFUlXjd4QHsWmY8Ji/giphy.gif" width="100%"/&gt;
+]
+---
+Finalmente o gênero de filmes que tomaram de assalto o cinema nos últimos 15 anos! Os filmes de super-heróis já existiam, mas desde meados dos anos 2000 se tornaram parte central da indústria do cinema. Os filmes do universo _Marvel_ tiveram uma média de __2.52__ no teste de Bechdel-Wallace, enquanto as produções da _DC_ tiveram uma média de __2.67__. De forma geral, dois terços dos filmes de super-heróis dos últimos 15 anos passou plenamente no teste. 
+
+
+
+&lt;img src="index_files/figure-html/unnamed-chunk-18-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+background-image: url("https://media.giphy.com/media/dYgfd374hlTz6uF772/giphy.gif")
+background-size: cover
+---
+## Resultado da batalha de franquias
+
+
+
+&lt;table&gt;
+&lt;caption&gt;Ranking das franquias analisadas&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; franquia &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Nota &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Rank &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; A Nightmare on Elm Street &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.88 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Friday the 13th &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.75 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Harry Potter &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.70 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; DC &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.67 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Marvel &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.52 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Alien &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.50 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Transformers &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.29 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 7 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Star Wars &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.08 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Fast and Furious &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Star Trek &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Lord of the Rings &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.50 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Predator &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.75 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+---
+### Considerações sobre o exercício
+
+É interessante como o teste de Bechdel-Wallace, ainda que uma sacada excelente, é focado na existência da representação feminina, embora a qualidade dessa possa ser duvidosa. Assim, filmes como da série _Transformers_ tiveram uma nota até razoável (ocupando a sétima posição no geral), ainda que as protagonistas femininas sejam representadas de maneira um tanto tosca e objetificada. 
+
+Ainda assim, o exercício foi extremamente interessante para ressaltar como filmes clássicos e de grande sucesso sequer conseguem ter o mínimo necessário - _duas personagens relevantes do sexo feminino!_ - e de forma geral, isso não é uma grande questão para críticos e o público.
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="libs/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "solarized-light",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
