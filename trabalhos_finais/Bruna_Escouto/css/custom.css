@@ -1,0 +1,62 @@
+.caption {
+  font-size: 40%;
+  color: #404040;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}
+
+.spoiler {
+  font-size: 40%;
+  color: #404040;
+}
+
+.bg_map {
+  position: relative;
+  z-index: 1;
+}
+
+.bg_map::before {    
+      content: "";
+      background-image: url(https://cdn.pixabay.com/photo/2019/07/10/15/42/nyc-4328896_960_720.jpg);
+      background-size: cover;
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+      left: 0px;
+      opacity: 0.2;
+      z-index: -1;
+}
+
+.hide_count .remark-slide-number {
+  display: none;
+}
+
+.h1_title {
+  font-family: var(--header-font-family), var(--header-font-family-fallback);
+  font-weight: 600;
+  font-size: 60px;
+  color: #000000;
+}
+
+.h2_title {
+  font-family: var(--header-font-family), var(--header-font-family-fallback);
+  font-weight: 600;
+  font-size: 40px;
+  color: #000000;
+}
+
+.long_title {
+  font-family: var(--header-font-family), var(--header-font-family-fallback);
+  font-weight: 200;
+  font-size: 20px;
+  color: #404040;
+}
+
+.pink_h {
+  
+  color: #E75B64FF;
+  font-weight: 600;
+  
+}

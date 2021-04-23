@@ -1,0 +1,275 @@
+---
+title: "**Consumo de alimentos e <br>emissões de CO$_2$**"
+author: "Ariane Hayana Thomé de Farias<br>Graduanda em Estatística (UFAM)<br>Manaus/Amazonas/Brasil"
+subtitle: "<a href='https://br.linkedin.com/in/arianehayana'>Ariane Hayana Thomé de Farias</a><br>#TidyTuesday"
+date: "`r format(Sys.Date(), format='%d/%m/%Y')`"
+encoding: "UTF-8"
+output:
+  rmdformats::readthedown:
+   code_folding: hide
+   self_contained: true
+   thumbnails: false
+   lightbox: true
+   gallery: false
+   highlight: tango
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+[![Fonte: Jen A. Miller is the author of "Running: A Love Story." She's
+been writing about running for The New York Times since
+2010.](https://static01.nyt.com/images/2016/08/11/well/well_nutritionforrunners_gif/well_nutritionforrunners_gif-jumbo-v5.gif)](https://www.nytimes.com/guides/well/healthy-eating-for-runners)
+
+```{r setup, echo = FALSE, warning = FALSE, include = FALSE, warnings=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, fig.align = "center")
+library(ggplot2)
+library(DT)
+library(corrplot)
+library(tidyverse)
+library(knitr)
+library(plotly)
+
+```
+
+
+## **Resumo**
+
+<div style="text-align: justify">
+
+As discussões sobre como adotar medidas que reduzam os impactos
+ambientais de nossas atividades diárias vem ganhando cada vez mais
+espaço nos debates relacionados ao meio ambiente. Medidas como a redução
+da queima de combustíveis fósseis na indústria, controle do desmatamento
+e a utilização cada vez mais recorrente de energia limpa são pontos
+relevantes para as transformações climáticas. No que se refere a
+alimentação saudável e sustentável não é diferente. Para uma explanação
+melhor nesta temática, este trabalho apresentará um estudo com dados
+sobre as emissões anuais de *CO*$_2$ por pessoa para 130 nações em todo
+o mundo publicados pela Organização das Nações Unidas para Alimentação e
+Agricultura (FAO) que estão disponíveis no site
+[nu3](https://www.nu3.de/blogs/nutrition/food-carbon-footprint-index-2018)
+cuja contribuição no \#tidytuesday é de autoria da [Kasia
+Kulma](https://r-tastic.co.uk/post/from-messy-to-tidy/).
+
+**Palavras-chave:** *Alimentação. Emissão de CO*$_2$. Meio ambiente.
+Consumo.
+
+<div/>
+
+## **1. Introdução**
+
+<div style="text-align: justify">
+
+A mudança de hábitos alimentares tem sido amplamente discutida não
+somente pela preocupação com a própria saúde, como também pela
+preocupação com o meio ambiente. A emissão de gases causadores do efeito
+estufa também fazem parte destas discussões. Conforme cita [Robert
+Sünderhauf (CEO da
+nu3)](https://www.nu3.de/blogs/nutrition/food-carbon-footprint-index-2018),
+"*o veganismo é uma escolha de estilo de vida cada vez mais popular,
+conforme demonstrado pela duplicação de nossa receita com produtos
+veganos só no ano passado. Com este estudo revelando como a mudança de
+dieta pode reduzir drasticamente nossa pegada de carbono, está se
+tornando cada vez mais difícil ignorar os benefícios de mudar para uma
+dieta baseada em vegetais, tanto para nossa saúde quanto para nosso
+planeta.*" Assim, para aprofundar este debate, foi realizado um
+levantamento de dados pela Organização das Nações Unidas para
+Agricultura e Alimentação (FAO) para examinar a pegada de carbono da
+indústria de alimentos, comparando diferentes dietas em termos de
+emissões de dióxido de carbono de 130 nações em todo o mundo
+considerando a quantidade de produtos de origem animal (carne de porco,
+aves, boi, cordeiro e cabra, peixe, ovos e leite - incluindo queijo) e
+produtos não animais (trigo e produtos de trigo, arroz, soja, nozes -
+incluindo manteiga de amendoim ) que é fornecido para consumo em cada
+país.
+
+Desta forma, com intuito de explorar os dados contidos no estudo supra
+citado, abordaremos neste trabalho algumas informações extraídas e, para
+tanto, este encontra-se organizado em cinco seções, dispostas da
+seguinte forma: a primeira trata da introdução, que aborda os principais
+aspectos do trabalho; a segunda refere-se a definição das variáveis
+utilizadas; a terceira apresenta os resultados e discussão sobre o
+estudo; na quarta encontram-se as considerações finais do trabalho e,
+posteriormente, as referências utilizadas.
+
+<div/>
+
+## **2. Descrição das variáveis**
+
+<div style="text-align: justify">
+
+Os dados foram extraídos via web scraping do site
+[nu3](https://www.nu3.de/blogs/nutrition/food-carbon-footprint-index-2018)
+e estão definidos no [dicionário de
+variáveis](https://github.com/rfordatascience/tidytuesday/tree/master/data/2020/2020-02-18)
+como sendo:
+
+| Variável      | Classe    | Descrição                                    |
+|---------------|-----------|----------------------------------------------|
+| country       | caractere | Nome do país                                 |
+| food_category | caractere | Categoria Alimentar                          |
+| consumption   | double    | Consumo (kg / pessoa / ano)                  |
+| co2_emmission | double    | Emissão de CO$_2$ (Kg CO$_2$ / pessoa / ano) |
+
+Este estudo analisa 130 países ao redor do mundo para determinar quanto
+dióxido de carbono (CO$_2$) cada país emite, com base em sua dieta. Isso
+é calculado através da quantidade de alimento fornecido para consumo e
+quantos kgs de CO$_2$ por kg de produto, por pessoa anualmente. Os dados
+em nível de país são divididos entre dietas baseadas em *animais* e *não
+baseadas em animais*.
+
+## **3. Resultados e discussão**
+
+<div/>
+
+<div style="text-align: justify">
+
+Nesta seção serão apresentados os principais resultados obtidos na
+análise de dados em questão. No primeiro momento fez-se a leitura das
+$1.430$ observações referentes às **quatro** variáveis citadas
+anteriormente e todos os dados podem ser consultados na tabela a seguir:
+
+<div/>
+
+```{r Leitura, echo=TRUE, message=FALSE, warnings=FALSE}
+# Leitura dos dados
+food_consumption <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-18/food_consumption.csv')
+
+food_consumption %>%
+  DT::datatable()
+
+```
+
+Para avaliar a força e a direção da relação entre as
+variáveis, fez-se uma matriz de correlação entre as variáveis *Consumo
+(kg/pessoa/ano)* e *Emissão de CO*$_2$(KgCO$_2$/pessoa/ano):
+
+```{r}
+food_consumption %>%
+	select(consumption, co2_emmission) %>%
+   cor() %>%
+	kable()
+```
+
+Através dos resultados obtidos na matriz de correlação, podemos afirmar
+que as variáveis *Consumo (kg/pessoa/ano)*, *Emissão de CO*$_2$(Kg
+CO$_2$/pessoa/ano) apresentam uma correlação positiva *fraca* pois a
+correlação resultante é de apenas $0,33$ e, portanto, enquadra-se no
+intervalo entre $0,2$ a $0,39$ $=$ <b><u>FRACA</b></u>, entretanto, cabe
+lembrar que:
+
+> **Correlação não** implica em **Causalidade**!
+
+Podemos também visualizar os valores de tais correlações através da
+matriz de correlação:
+
+```{r fig.height=5, fig.width=5}
+food_consumption %>%
+	select(consumption, co2_emmission) %>%
+	cor() %>%
+   corrplot(type="upper",tl.srt=45,tl.cex = 1)
+
+```
+
+Visualmente, quanto maior o círculo, maior a correlação entre as variáveis e quanto mais azul escuro, mais próxima a correlação estará de 1 (correlação positiva e forte). O mesmo ocorre caso seja negativa (ou seja, -1): quanto mais vermelho escuro, mais forte será a correlação. 
+
+Agora, considerando a quantidade de produtos de origem animal e
+produtos não animais que é fornecido para consumo em cada país, é possível observar na tabela a seguir um *ranking* com os dez produtos mais consumidos *(kg/pessoa/ano)* ordenados do maior para o menor:
+
+
+```{r}
+food_consumption %>%
+ group_by(food_category) %>%
+ summarise(total_consumo = sum(consumption),
+           total_emissao_co2 = sum(co2_emmission)) %>%
+ arrange(-total_consumo) %>%
+   head(10) %>%
+ kable()
+```
+
+Conforme podemos observar, o *Leite (incluindo queijo)* é o mais consumido, seguido do *Trigo e Produtos de Trigo* e o *Arroz*. Por outro lado, quando analisamos por categoria alimentar quais são os produtos que mais emitem CO$_2$, observa-se o seguinte cenário:
+
+```{r}
+food_consumption %>%  
+  group_by(food_category) %>%  
+  summarise(total_emissao_co2 = sum(co2_emmission)) %>%  
+  ggplot(aes(x = food_category, y = total_emissao_co2,fill = food_category)) +        
+aes(reorder(food_category, total_emissao_co2))+ 
+  geom_col() +  
+  coord_flip() +  
+    ggthemes::theme_wsj() +
+   guides(fill = "none")+
+   labs(
+    title = "Ranking de emissão de \nCO2 por categoria \nalimentar",
+    x = "Categoria",
+    y = "Emissão de Co2 (Kg CO2/pessoa/ano)",
+    color = "Categoria alimentar")
+
+```
+<br>
+Nota-se que a *Carne* aparece como o produto com maior emissão de CO$_2$, seguida do *Leite (incluindo queijo)* e *Cordeiro e Cabra*.
+Sob outra perspectiva, analisaremos graficamente um ranking com todos os países do estudo com o objetivo de verificarmos categoricamente quais são os países que mais emitiram dióxido de carbono na dieta com produtos de origem animal e não animal:
+
+```{r fig.height=16, fig.width=9}
+
+ggplot(food_consumption, aes(x = reorder(country,co2_emmission), y = co2_emmission)) +
+   geom_col(aes(fill = food_category)) +
+  coord_flip() +
+   labs(
+    title = "Representação gráfica da emissão de CO2 por categoria alimentar",
+    x = "País",
+    y = "Emissão de Co2 (Kg CO2/pessoa/ano)",
+    color = "Categoria alimentar",
+    caption = "Elaborado por: Ariane Hayana Thomé de Farias") +
+   scale_fill_viridis_d(
+    alpha = .99, 
+    begin = .1, 
+    end = .9, 
+    direction = 1, 
+    option = "D") +
+    theme_bw() 
+
+
+```
+
+É possível observarmos que países como *Argentina*, *Austrália* e *Albania* são destaques no topo e o Brasil está entre os dez países no *ranking* de emissão considerando a análise por categoria, com valores mais expressivos na categoria de produto *Carne*. 
+
+Por fim, elaborou-se *boxplots* considerando a *emissão de CO$_2$ por categoria* e também o *consumo por categoria*:
+
+```{r, warnings=FALSE}
+plot_ly(food_consumption, 
+        y = ~co2_emmission, 
+        color = ~food_category, 
+        type = "box")
+```
+
+```{r, warnings=FALSE}
+plot_ly(food_consumption, 
+        y = ~consumption, 
+        color = ~food_category, 
+        type = "box")
+```
+
+## **4. Considerações finais**
+
+<div style="text-align: justify">
+
+De acordo com os dados obtidos, podemos concluir que os níveis de CO$_2$ na atmosfera são bastante altos sob a ótica alimentar. É alarmante ver o Brasil como um dos dez países com maiores emissões de dióxido de carbono e isto serve como um gatilho para repensarmos sobre nossas atitudes e comportamentos de consumo também. Espera-se que nosso país cumpra metas factíveis sobre as políticas nacionais e internacionais voltadas a redução das emissões de CO$_2$ não somente na questão alimentar, como também nas diversas áreas agravantes para tal cenário.
+
+<div/>
+
+## **Referências**
+
+- Food carbon footprint index 2018: <br> 
+https://www.nu3.de/blogs/nutrition/food-carbon-footprint-index-2018
+
+- GitHub do #TidyTuesday: <br> https://github.com/rfordatascience/tidytuesday/tree/master/data/2020/2020-02-18
+
+- Webscraping with R - from messy & unstructured to blisfully tidy: <br>
+https://r-tastic.co.uk/post/from-messy-to-tidy/
+
+
+<div/>
+
+

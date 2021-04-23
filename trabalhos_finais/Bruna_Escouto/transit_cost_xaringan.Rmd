@@ -1,0 +1,712 @@
+---
+title: "Transit costs"
+author: "Brunna Escouto"
+date: "12/04/2021"
+output:
+  xaringan::moon_reader:
+    css: [css/xaringan-themer.css, css/custom.css]
+    seal: false
+    chakra: libs/remark-latest.min.js
+    lib_dir: libs
+    encoding: "UTF-8"
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      beforeInit: "https://platform.twitter.com/widgets.js"
+      
+---
+
+```{r data_setup, include=FALSE}
+
+library(tidyverse)
+library(ggplot2)
+library(scales)
+library(showtext) 
+library(reactable)
+library(htmltools)
+library(plotly)
+library(xaringanthemer)
+
+# devtools::install_github("hrbrmstr/waffle")
+library(waffle)
+
+# devtools::install_github("dill/emoGG")
+library(emoGG) 
+
+```
+
+```{r basic_data, include=FALSE}
+
+transit_cost <- read_rds("data/transit_cost.RDS") %>% 
+  drop_na() %>% 
+  rename(id = e) %>% 
+  mutate(country = ifelse(country == "UK", "GB", country),
+         region = countrycode::countrycode(country, 
+                                           origin = "ecb",
+                                           destination = "region"),
+         continent = countrycode::countrycode(country, 
+                                              origin = "ecb",
+                                              destination = "continent"),
+         country_name = countrycode::countrycode(country, 
+                                            origin = "ecb", 
+                                            destination = "cldr.name.pt"),
+         country = countrycode::countrycode(country,
+                                            origin = "ecb",
+                                            destination = "iso3c"),
+         start_year = as.numeric(start_year)) %>% 
+  mutate(continent = ifelse(region == "North America", 
+                            region, 
+                            continent),
+         continent = ifelse(region == "Latin America & Caribbean",
+                            region,
+                            continent),
+         continent = case_when(continent == "North America" ~ "América do Norte",
+                               continent == "Latin America & Caribbean" ~ "América Latina", 
+                               continent == "Europe" ~ "Europa", 
+                               continent == "Africa" ~ "África",
+                               continent == "Asia" ~ "Ásia",
+                               TRUE ~ continent)) %>% 
+  select(id, continent, country, country_name, city, line, start_year, end_year, year, 
+         rr, length, tunnel_per, tunnel, stations, cost, currency, 
+         ppp_rate, real_cost, cost_km_millions)
+
+```
+
+```{r xaringan_themer, include=FALSE}
+
+style_duo_accent(primary_color = "#278B9AFF", 
+                 secondary_color = "#D8AF39FF",
+                 header_font_google = google_font("Roboto"), 
+                 text_font_google = google_font("Bitter"))
+
+```
+
+```{r font_setup, include=FALSE}
+
+font_add_google(name = "Roboto", family = "roboto")
+font_add_google(name = "Bitter", family = "bitter")
+showtext_auto()
+
+```
+
+
+class: center, middle, bg_map, hide_count
+
+# 🚝
+
+.h1_title[Ferrovias urbanas:]
+
+.h2_title[insights a partir dos dados de mais de 50 países]
+
+<br>
+<br>
+
+.long_title[Brunna Escouto | curso de visualização de dados e relatórios | abril de 2021]
+
+.caption[Imagem de <a href="https://pixabay.com/pt/users/andrzejrembowski-2775184/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4328896">Andrzej Rembowski</a> por <a href="https://pixabay.com/pt/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4328896">Pixabay</a>]
+
+
+---
+
+
+class: left, middle
+
+
+.pull-left[ 
+
+# TidyTuesday 2021: week 2 🖥️
+
+<br>
+
+* O desafio proposto envolve dados relativos ao custo de obras de infraestrutura de trânsito, em especial .pink_h[metrôs]. 
+
+<br>
+
+* O dataset contém informações de projetos de .pink_h[`r transit_cost %>% distinct(country) %>% nrow() ` países] ao redor do mundo com início entre os anos de .pink_h[`r min(transit_cost$start_year)`] e .pink_h[`r max(transit_cost$start_year)`].
+
+]
+
+.pull-right[
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">The <a href="https://twitter.com/R4DScommunity?ref_src=twsrc%5Etfw">@R4DScommunity</a> welcomes you to week 2 of <a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;ref_src=twsrc%5Etfw">#TidyTuesday</a>! We&#39;re exploring Global Transit Costs!!<br><br>📁 <a href="https://t.co/sElb4fcv3u">https://t.co/sElb4fcv3u</a><br>🗞 <a href="https://t.co/yqG9IhGlpf">https://t.co/yqG9IhGlpf</a><a href="https://twitter.com/hashtag/r4ds?src=hash&amp;ref_src=twsrc%5Etfw">#r4ds</a> <a href="https://twitter.com/hashtag/tidyverse?src=hash&amp;ref_src=twsrc%5Etfw">#tidyverse</a> <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a> <a href="https://twitter.com/hashtag/dataviz?src=hash&amp;ref_src=twsrc%5Etfw">#dataviz</a> <a href="https://t.co/ZBp0Kj9jPb">pic.twitter.com/ZBp0Kj9jPb</a></p>&mdash; Tom Mock (@thomas_mock) <a href="https://twitter.com/thomas_mock/status/1346124836674936832?ref_src=twsrc%5Etfw">January 4, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+]
+
+
+---
+
+
+class: left, middle
+
+```{r table_data, include=FALSE}
+
+table_data <- transit_cost %>% 
+  select(id, continent, country, country_name) %>% 
+  mutate(flag = countrycode::countrycode(country, origin = "iso3c", destination = "iso2c"),
+         flag = str_to_lower(flag),
+         flag = sprintf('https://flagpedia.net/data/flags/w580/%s.png', flag)) %>% # https://stackoverflow.com/questions/25106481/add-an-image-to-a-table-like-output-in-r
+  group_by(flag, continent, country_name) %>% 
+  summarise(qtd = n()) %>% 
+  ungroup()
+
+```
+
+
+# Perfil da amostra 🔬
+
+```{r reactable, echo=FALSE}
+
+table_data %>% 
+  
+  reactable(
+    
+    columns = list(
+      
+      flag = colDef("", cell = reactablefmtr::embed_img(flag, 
+                                                         height = "25", 
+                                                         width = "35")),
+      continent = colDef(show = FALSE), 
+      
+      country_name = colDef("País", cell = function(value, index) {
+        
+        # show continent under country
+        continent <- table_data$continent[index]
+        
+        tagList(div(style = list(fontWeight = 600), value),
+          div(style = list(fontSize = 12), continent))
+        
+      }),
+      
+      qtd = colDef("Número de obras")),
+    
+    defaultPageSize = 5,
+    defaultSorted = "qtd",
+    defaultSortOrder = "desc",
+    searchable = TRUE,
+    paginationType = "jump",
+    showPageInfo = FALSE,
+    highlight = TRUE,
+    
+    theme = reactableTheme(cellStyle = list(
+      
+      # vertically center cells
+      display = "flex", 
+      flexDirection = "column", 
+      justifyContent = "center",
+      fontFamily = "roboto"
+    )))
+
+
+```
+
+
+---
+
+
+class: center, middle
+
+## Vamos às análises? 🤓
+
+```{r initial_gif, echo=FALSE, out.width='60%', fig.align='center'}
+
+knitr::include_graphics("https://media.giphy.com/media/oLkalyqBkSIg0/giphy.gif")
+
+```
+
+
+---
+
+class: inverse, center, middle
+
+# 💸🗺️
+# Custo/km construído vs localização
+
+
+---
+
+class: center, middle 
+
+```{r map_data, include=FALSE}
+
+world_cost_length <- transit_cost %>% 
+  select(country, cost_km_millions, length) %>% 
+  group_by(country) %>% 
+  summarise(average_cost = mean(cost_km_millions),
+            total_length = sum(length))
+
+
+world <- rnaturalearth::ne_countries(scale = "medium", returnclass = "sf") %>% 
+  left_join(world_cost_length, by = c("iso_a3" = "country")) %>% 
+  drop_na(average_cost, total_length)
+
+borderless_world <- rnaturalearth::ne_countries(scale = "medium", returnclass = "sf")
+
+map <- ggplot() +
+  
+  geom_sf(data = borderless_world, fill = "gray90", color = "gray90") + # camada dos NAs
+  
+  geom_sf(data = world, aes(fill = total_length), color = "gray90") +
+  geom_sf_text(data = world, aes(label = dollar(average_cost, accuracy = 1, big.mark = ".", decimal.mark = ",")), 
+               check_overlap = TRUE,
+               size = 3,
+               family = "bitter") +
+  
+  scale_fill_gradientn(colors = c("#86C2DAFF", "#D8AF39FF", "#278B9AFF"),
+                       breaks = c(1000, 2000, 3000, 4000),
+                       labels = c("1.000 km", "2.000 km", "3.000 km", "4.000 km")) +
+  
+  labs(fill = "Distância construída (km)",
+       title = "Investimentos em linhas de metrô ao redor do mundo",
+       subtitle = "Custo real médio de obras de infraestrutura viária realizadas em mais de 50 países",
+       caption = "Dados de obras iniciadas entre 1984 e 2025\nValores em milhões de dólares") +
+  
+  theme_void() +
+  theme(legend.direction = "horizontal",
+        legend.position = "bottom",
+        legend.key.width = unit(20, "mm"),
+        legend.key.height = unit(4, "mm"),
+        legend.text = element_text(size = 10, vjust = 1, lineheight = 0.3, color = "#404040"),
+        legend.title = element_text(size = 12, lineheight = 0.5),
+        
+        plot.title = element_text(family = "roboto", size = 30),
+        plot.subtitle = element_text(family = "roboto", size = 16, color = "#404040"),
+        plot.caption = element_text(family = "roboto", size = 10, color = "#404040"),
+        plot.margin = unit(c(0.5, 0.5, 2, 0.5), "cm"))
+
+```
+
+```{r map, echo=FALSE, warning=FALSE, dev = 'svg', fig.height= 9, fig.width= 12, out.width='90%', fig.align='center'}
+
+map
+
+```
+
+---
+
+class: center, middle
+
+```{r mean_decade_data, include=FALSE}
+
+mean_decade_cost_continent <- transit_cost %>% 
+  select(id, continent, start_year, cost_km_millions) %>% 
+  mutate(decade = round(start_year, -1)) %>% #decade
+  group_by(continent, decade) %>% 
+  summarise(mean = mean(cost_km_millions)) %>% 
+  ungroup() %>% 
+  filter(decade %in% c("2000", "2010", "2020")) %>% # apenas décadas com todos os continentes
+  mutate(continent = fct_reorder(continent, mean)) 
+
+ 
+  
+mean_decade_plot <- mean_decade_cost_continent %>%
+  
+  ggplot() +
+  
+  geom_col(aes(x = decade, y = mean, fill = continent), position = "dodge") +
+  ghibli::scale_fill_ghibli_d("PonyoMedium") +
+  
+  geom_label(aes(x = decade, y = mean, group = continent,
+                 label = dollar(mean, largest_with_cents = "100")),
+             position = position_dodge(width = 9),
+             family = "bitter") +
+  
+  theme_minimal() +
+  theme(legend.position = c(0.22,0.85), # colocar legenda dentro do plot
+        legend.title = element_blank(),
+        legend.text = element_text(size = 12),
+        legend.key.size = unit(0.6, "cm"), # diminuir o tamanho dos quadradinhos
+        legend.direction = "horizontal", 
+        legend.background = element_rect(color = "#404040", fill = "white", linetype = "solid"), # legenda com fundo e margem
+        
+        plot.title = element_text(family = "roboto", size = 34),
+        plot.subtitle = element_text(family = "roboto", size = 24, color = "#404040"),
+        plot.caption = element_text(family = "roboto", size = 12, color = "#404040"),
+        plot.margin = unit(c(0.5, 0.5, 2, 0.5), "cm"),
+        
+        axis.title = element_text(size = 16),
+        axis.text = element_text(size = 12)) + 
+  
+  labs(title = "Custo de obras de metrô em diferentes continentes",
+       subtitle = "Valor médio por década",
+       x = "\nDécada de início das obras",
+       y = "Custo por km (USD / milhão)\n") 
+
+```
+
+
+```{r mean_decade_plot, echo=FALSE, warning=FALSE, dev = 'svg', fig.height= 10, fig.width= 16, out.width='90%', fig.align='center'}
+
+mean_decade_plot
+
+```
+
+
+---
+
+class: middle
+
+### Relação entre custo/km e início da obra
+
+```{r regressao_data, echo=FALSE}
+
+plot_regressao <- transit_cost %>% 
+  mutate(city_country = paste0(city, ", ", country)) %>%
+  rename(Ano = start_year, Custo = cost_km_millions) %>% 
+  
+  ggplot(aes(x = Ano,
+             y = Custo,
+             color = continent,
+             group = continent,
+             text = city_country)) +
+  
+  geom_jitter(height = 0,
+              width = 0.3,
+              alpha = 0.5) +
+  
+  geom_smooth(method = "lm",
+              se = FALSE) +
+  
+  scale_y_log10(breaks = c(10, 100, 1000), 
+                labels = c("$10", "$100", "$1.000")) +
+  
+  labs(x = "",
+       y = "") +
+  
+  ghibli::scale_color_ghibli_d("PonyoMedium") +
+  
+  theme_minimal() +
+  
+  theme(legend.title = element_blank())
+
+
+plot_regressao_ppp <- transit_cost %>% 
+  mutate(city_country = paste0(city, ", ", country),
+         cost_ppp = ppp_rate * cost_km_millions) %>%
+  rename(Ano = start_year, Custo = cost_ppp) %>% 
+  
+  ggplot(aes(x = Ano,
+             y = Custo,
+             color = continent,
+             group = continent,
+             text = city_country)) +
+  
+  geom_jitter(height = 0,
+              width = 0.3,
+              alpha = 0.5) +
+  
+  geom_smooth(method = "lm",
+              se = FALSE) +
+  
+  scale_y_log10(breaks = c(0.1, 1, 10, 100, 1000), 
+                labels = c("$0.1", "$1", "$10", "$100", "$1.000")) +
+  
+  labs(x = "",
+       y = "") +
+  
+  ghibli::scale_color_ghibli_d("PonyoMedium") +
+  
+  theme_minimal() +
+  
+  theme(legend.title = element_blank())
+
+```
+
+```{r plot_regressao, echo=FALSE, fig.align='center', fig.width=14, fig.height=7, out.width='100%', warning=FALSE, message=FALSE}
+
+ggplotly(plot_regressao, 
+                             tooltip = c("text", "Ano", "Custo")) %>% 
+  style(hoverlabel = list(bgcolor = "#FFFFFF")) %>% 
+  layout(legend = list(orientation = "h",
+                       x = 0.015,
+                       y = -0.1))
+
+```
+ 
+ 
+---
+
+class: middle
+
+### Relação entre custo/km e início da obra corrigida pela PPC*
+
+```{r plot_regressao_ppp, echo=FALSE, fig.align='center', fig.width=14, fig.height=7, out.width='100%', warning=FALSE, message=FALSE}
+
+ggplotly(plot_regressao_ppp, 
+                                 tooltip = c("text", "Ano", "Custo")) %>% 
+  style(hoverlabel = list(bgcolor = "#FFFFFF")) %>% 
+  layout(legend = list(orientation = "h",
+                       x = 0.015,
+                       y = -0.1))
+
+```
+
+.caption[PPC (em inglês, PPP) significa paridade do poder de compra, indicador que compara moedas de diferentes países.]
+
+
+---
+
+class: middle
+
+## Custo/km construído vs localização
+
+<br>
+
+* É notável a quantidade de países que estão .pink_h[ausentes no mapa];
+
+* A maioria dos países tem .pink_h[distância construída baixa] quando comparados com a China;
+
+* Estados Unidos possuem o .pink_h[maior custo] por km construído: em quase 50 anos de obras, o valor médio atinge quatro dígitos;
+
+* Custos variam de acordo com as regiões do mundo e tendem a .pink_h[aumentar ao longo dos anos] estudados, mas costumam ser consistentes entre si. 
+<br>  
+Exceção é a América do Norte, que na década de 2000 deu um salto; .spoiler[(spoiler: culpa dos EUA)]  
+
+* Fica evidente a .pink_h[disparidade] entre América Latina e América do Norte;
+
+
+---
+
+
+class: inverse, center, middle
+
+# 🛑🚇
+# Detalhes das obras
+
+
+---
+
+
+class: center, middle
+
+```{r tunnel_data, include=FALSE}
+
+tunnel_decades <- transit_cost %>%
+  mutate(decade = as.numeric(start_year) %>%
+           round(., -1),
+         regular = length - tunnel) %>%
+  select(decade, regular, tunnel) %>% 
+  group_by(decade) %>% 
+  summarise(regular = sum(regular),
+            tunnel = sum(tunnel)) %>% 
+  ungroup() %>% 
+  pivot_longer(cols = c("regular", "tunnel"), 
+               names_to = "type", 
+               values_to = "distance") %>% 
+  group_by(decade) %>% 
+  mutate(perc = distance / sum(distance)) %>% 
+  ungroup() 
+  
+
+tunnel_plot <- tunnel_decades %>%
+  
+  ggplot() +
+  
+  geom_area(aes(x = decade, y = perc, fill = type),
+            size = 0.5, alpha = 0.8, color = "white") +
+  
+  geom_label(data = tunnel_decades %>% 
+               filter(type == "tunnel"),
+             aes(x = decade, y = perc, label = percent(perc, accuracy = 1)),
+             family = "bitter") +
+  
+  annotate("text",
+           x = 2000,
+           y = 0.15,
+           label = "túneis",
+           size = 4,
+           family = "bitter",
+           color = "#404040") +
+  
+  add_emoji("1f687", 
+            x = 2000,
+            y = 0.2, 
+            ysize = 2) +
+  
+  annotate("text",
+           x = 2000,
+           y = 0.77,
+           label = "vias férreas regulares",
+           size = 4,
+           family = "bitter",
+           color = "#404040") +
+  
+  add_emoji("1f6e4", 
+                   x = 2000,
+                   y = 0.82, 
+                   ysize = 2) +
+  
+  labs(title = "Proporção entre túneis e ferrovias regulares",
+       subtitle = "Baseada na distância total construída por década\n",
+       x = "",
+       y = "") +
+  
+  scale_y_continuous(label = label_percent()) +
+  
+  scale_fill_manual(values = c("#278B9AFF", "#D8AF39FF")) +
+  
+  theme_minimal() +
+  theme(panel.grid.minor.x  = element_line(color = "white"),
+        panel.grid.minor.y  = element_line(color = "white"),
+        
+        legend.position = "none",
+        
+        plot.title = element_text(family = "roboto", size = 24),
+        plot.subtitle = element_text(family = "roboto", size = 16, color = "#404040"))
+
+```
+
+```{r tunnel_plot, echo=FALSE, warning=FALSE, dev = 'svg', fig.height= 7.5, fig.width= 10, out.width='70%', fig.align='center'}
+
+tunnel_plot
+
+```
+
+
+---
+
+
+class: middle
+
+```{r waffle_data, include=FALSE}
+
+waffle_stations <- transit_cost %>% 
+  select(id, continent, stations) %>% 
+  mutate(interval = cut(stations, 
+                        breaks = c(0, 5, 10, 20, 40, Inf),
+                        labels = c("0 a 5", "5 a 10", "10 a 20", "20 a 40", "+ 40"),
+                        include.lowest = TRUE)) %>% 
+  group_by(continent, interval) %>% 
+  summarise(n = length(interval))
+
+
+waffle_prop_plot <- waffle_stations %>% 
+  ggplot(aes(fill = interval,
+             values = n)) +
+  
+  geom_waffle(color = "white", 
+              size = 1.125,
+              n_rows = 5, 
+              make_proportional = TRUE) +
+  scale_fill_manual(name = "Quantidade de estações", values = c("#D8AF39FF", "#DE7862FF", "#E75B64FF", "#278B9AFF", "#5A6F80FF")) +
+  
+  facet_wrap(~continent, ncol = 1) +
+  
+  coord_equal() +
+  
+  theme_void() +
+  theme(legend.direction = "horizontal",
+        legend.position = "bottom",
+        legend.key.width = unit(3, "mm"),
+        legend.key.height = unit(3, "mm"),
+        legend.text = element_text(size = 8, lineheight = 0.1, color = "#404040"),
+        legend.title = element_text(size = 10, lineheight = 0.3),
+        strip.text = element_text(size = 12, hjust = 0.07, family = "bitter"),
+        panel.spacing.y = unit(2, "lines"))
+
+waffle_real_plot <- waffle_stations %>% 
+  ggplot(aes(fill = interval,
+             values = n)) +
+  
+  geom_waffle(color = "white", 
+              size = 1.125,
+              n_rows = 4, 
+              make_proportional = FALSE) +
+  scale_fill_manual(name = "Quantidade de estações", values = c("#D8AF39FF", "#DE7862FF", "#E75B64FF", "#278B9AFF", "#5A6F80FF")) +
+  
+  facet_wrap(~continent, ncol = 1) +
+  
+  coord_equal() +
+  
+  theme_void() +
+  theme(legend.direction = "horizontal",
+        legend.position = "bottom",
+        legend.key.width = unit(3, "mm"),
+        legend.key.height = unit(3, "mm"),
+        legend.text = element_text(size = 8, lineheight = 0.1, color = "#404040"),
+        legend.title = element_text(size = 10, lineheight = 0.3),
+        strip.text = element_text(size = 12, hjust = 0.055, family = "bitter"),
+        panel.spacing = unit(2, "lines"))
+
+```
+
+.pull-left[
+
+.long_title[Panorama de estações]
+
+```{r waffle_prop_plot, echo=FALSE, warning=FALSE, dev = 'svg', fig.height= 8, fig.width= 6.6, out.width='90%', fig.align='center'}
+
+waffle_prop_plot
+
+```
+
+]
+
+.pull-right[
+
+.long_title[Proporcionais à quantidade de obras]
+
+```{r waffle_prop_real, echo=FALSE, warning=FALSE, dev = 'svg', fig.height= 9, fig.width= 9, out.width='100%', fig.align='center'}
+
+waffle_real_plot
+
+```
+
+]
+
+
+---
+
+class: middle
+
+## Detalhes das obras: túneis e estações
+
+<br>
+
+* Mais da metade da distância construída ao longo de todos os anos analisados é em .pink_h[túneis], sendo a década de 2020 a com a maior proporção até então;
+
+* Na maioria dos continentes predominam obras de .pink_h[até 5 estações]; 
+
+
+---
+
+
+class: inverse, center, middle
+
+# 🧐📑
+# Conclusões
+
+
+---
+
+class: middle
+
+## Conclusões
+
+<br>
+
+* .pink_h[Ásia] é o continente que mais concentra obras;
+
+* .pink_h[China] é o pais que faz o maior número de obras de metrô e que tem maior distância construída;
+
+* .pink_h[Estados Unidos] são quem mais investe, trazendo discrepância para a análise; 
+
+* .pink_h[Africa problem]: poucos países e poucas obras nesses países. Será que não temos obras lá ou apenas não temos dados sistematizados?
+
+
+---
+
+
+class: center, middle
+
+# Obrigada! 😊
+
+```{r final_gif, echo=FALSE, out.width='30%', fig.align='center'}
+
+knitr::include_graphics("https://media.giphy.com/media/1gWlJphS3Vr2uDzyzm/giphy.gif")
+
+```
+
+
+
