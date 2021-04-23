@@ -24,6 +24,14 @@ Fora do horário de aula ou monitoria:
 -   perguntas sobre R, principalmente as que envolverem código, deverão
     ser enviadas no [nosso fórum](https://discourse.curso-r.com/).
 
+## Trabalhos finais premiados
+
+| Nome           | Link para o trabalho                                                                                 | Link para o código                                                                                   |
+|:---------------|:-----------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------|
+| Ariane Hayana  | [Trabalho](https://curso-r.github.io/202103-visualizacao/trabalhos_finais/Ariane_Hayana/index.html)  | [Código](https://github.com/curso-r/202103-visualizacao/tree/master/trabalhos_finais/Ariane_Hayana)  |
+| Brunna Escouto | [Trabalho](https://curso-r.github.io/202103-visualizacao/trabalhos_finais/Brunna_Escouto/index.html) | [Código](https://github.com/curso-r/202103-visualizacao/tree/master/trabalhos_finais/Brunna_Escouto) |
+| Rafael Rocha   | [Trabalho](https://curso-r.github.io/202103-visualizacao/trabalhos_finais/Rafael_Rocha/index.html)   | [Código](https://github.com/curso-r/202103-visualizacao/tree/master/trabalhos_finais/Rafael_Rocha)   |
+
 ## Slides
 
 | slide                                     | link                                                                                    |
